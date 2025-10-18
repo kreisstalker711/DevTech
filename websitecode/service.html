@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #121212; /* Classic Dark Charcoal */
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95); /* Corresponds to the new body background */
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .services {
+            padding: 8rem 2rem 4rem 2rem;
+            background: #1E1E1E; /* Lighter Charcoal for depth */
+            min-height: calc(100vh - 200px);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #e0e0e0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #111827; /* Dark Slate Gray/Blue */
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #8b9cef;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #b0b0b0;
+        }
+        
+        .footer {
+            padding: 2rem;
+            background: #111827; /* Dark Slate Gray/Blue */
+            color: #888;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+   <nav class="navbar">
+       <a href="main.html" class="logo">DevTech</a>
+       <ul class="nav-links">
+           <li><a href="main.html#home">Home</a></li>
+           <li><a href="service.html">Services</a></li>
+           <li><a href="about.html">About</a></li>
+           <li><a href="main.html#contact">Contact</a></li>
+       </ul>
+   </nav>
+   
+   <section id="services" class="services">
+       <h2 class="section-title">Our Services</h2>
+       <div class="services-grid">
+           <div class="service-card">
+               <div class="service-icon">🎨</div>
+               <h3>Web Design</h3>
+               <p>Creating stunning, user-friendly interfaces that captivate your audience and drive engagement.</p>
+           </div>
+           <div class="service-card">
+               <div class="service-icon">💻</div>
+               <h3>Web Development</h3>
+               <p>Building robust, scalable web applications using cutting-edge technologies and best practices.</p>
+           </div>
+       </div>
+   </section>
+   
+   <div class="footer">
+       <p>Contact:</p>
+       <p><span>Email Id: kathir20san@gmail</span></p>
+       <p><span>Discord team-code: </span></p>
+   </div>
+</body>
+</html>

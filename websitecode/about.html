@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Dev Tech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #121212; /* Classic Dark Charcoal */
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .about-container {
+            padding: 8rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        .about-section {
+            background: #1E1E1E;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: #8b9cef;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+        }
+
+        .about-section p {
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .team-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #e0e0e0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: #1E1E1E;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #667eea;
+            margin-bottom: 1rem;
+            object-fit: cover;
+            background-color: #333; /* Placeholder color */
+        }
+
+        .team-member h3 {
+            font-size: 1.4rem;
+            color: #e0e0e0;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member .role {
+            color: #8b9cef;
+            font-weight: 500;
+        }
+
+        footer {
+            background: #121212;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="main.html" class="logo">DevTech</a>
+        <ul class="nav-links">
+            <li><a href="main.html#home">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="main.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="about-container">
+        <header class="page-header">
+            <h1>About Dev Tech</h1>
+            <p>The architects of your digital success.</p>
+        </header>
+
+        <section class="about-section">
+            <h2>Our Mission</h2>
+            <p>To empower businesses by crafting innovative, high-performance, and user-centric web solutions. We strive to translate complex challenges into elegant digital experiences that drive growth and create lasting value for our clients.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>Our Vision</h2>
+            <p>To be a leading force in web development, recognized for our technical excellence, creative problem-solving, and unwavering commitment to client success. We envision a digital landscape where every business can achieve its full potential through powerful and accessible technology.</p>
+        </section>
+
+        <section class="team-section">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120" alt="Founder and President Kathiravan Sankar">
+                    <h3>Kathiravan Sankar</h3>
+                    <p class="role">Founder & President</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120" alt="Vice President Vidyaranya">
+                    <h3>Vidyaranya</h3>
+                    <p class="role">Vice President</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120" alt="Chief Design Officer arnav.s">
+                    <h3>Arnav.S</h3>
+                    <p class="role">Chief Design Officer</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120" alt="UI/UX Designer Ethindran">
+                    <h3>Ethindran</h3>
+                    <p class="role">UI/UX Designer</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
+    </footer>
+
+</body>
+</html>
