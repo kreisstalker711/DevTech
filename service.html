@@ -3,25 +3,30 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Services - Dev Tech</title>
+   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #e0e0e0;
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
-            margin: 0;
-            padding: 0;
         }
         
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(18, 18, 18, 0.95); /* Corresponds to the new body background */
+            background: rgba(18, 18, 18, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 5%;
+            padding: 1rem 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,6 +41,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-decoration: none;
         }
 
         .nav-links {
@@ -56,9 +62,9 @@
         }
 
         .services {
-            padding: 8rem 2rem 4rem 2rem;
-            background: #1E1E1E; /* Lighter Charcoal for depth */
-            min-height: calc(100vh - 200px);
+            padding: 8rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .section-title {
@@ -72,15 +78,12 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .service-card {
-            background: #111827; /* Dark Slate Gray/Blue */
+            background: #1E1E1E;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid rgba(102, 126, 234, 0.1);
         }
@@ -88,7 +91,6 @@
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .service-icon {
@@ -98,34 +100,65 @@
 
         .service-card h3 {
             color: #8b9cef;
-            margin-bottom: 1rem;
             font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .service-card p {
             color: #b0b0b0;
         }
         
-        .footer {
-            padding: 2rem;
-            background: #111827; /* Dark Slate Gray/Blue */
-            color: #888;
+        .contact {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-align: center;
         }
-        
-        .footer p {
-            margin: 0.5rem 0;
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .contact-button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: #121212;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
         }
     </style>
 </head>
 <body>
    <nav class="navbar">
-       <a href="main.html" class="logo">DevTech</a>
+       <a href="index.html" class="logo">DevTech</a>
        <ul class="nav-links">
-           <li><a href="main.html#home">Home</a></li>
+           <li><a href="index.html#home">Home</a></li>
            <li><a href="service.html">Services</a></li>
+           <li><a href="projects.html">Projects</a></li>
            <li><a href="about.html">About</a></li>
-           <li><a href="main.html#contact">Contact</a></li>
+           <li><a href="contact.html">Contact</a></li>
        </ul>
    </nav>
    
@@ -144,11 +177,15 @@
            </div>
        </div>
    </section>
-   
-   <div class="footer">
-       <p>Contact:</p>
-       <p><span>Email Id: kathir20san@gmail</span></p>
-       <p><span>Discord team-code: </span></p>
-   </div>
+
+    <section id="contact" class="contact">
+        <h2>Ready to Start Your Project?</h2>
+        <p>Let's discuss how we can help you achieve your digital goals</p>
+        <a href="contact.html" class="contact-button">Contact Us</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
+    </footer>
 </body>
 </html>

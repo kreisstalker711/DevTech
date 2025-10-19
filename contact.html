@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Dev Tech</title>
+    <title>Contact Us - Dev Tech</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <style>
         * {
@@ -61,90 +61,94 @@
             color: #667eea;
         }
 
-        .content-container {
+        .contact-container {
             padding: 8rem 5% 4rem;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            text-align: center;
         }
 
-        .content-container h1 {
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
             font-size: 3rem;
-            margin-bottom: 2rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 0.5rem;
         }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
-            margin-top: 4rem;
-            text-align: left;
+        .page-header p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
         }
 
-        .project-card {
+        .contact-form {
             background: #1E1E1E;
+            padding: 2.5rem;
             border-radius: 15px;
-            overflow: hidden;
             border: 1px solid rgba(102, 126, 234, 0.1);
-            transition: box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
         }
 
-        .project-card:hover {
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        .project-card iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
+        .form-group label {
             display: block;
+            margin-bottom: 0.5rem;
+            color: #b0b0b0;
+            font-weight: 500;
         }
 
-        .project-info {
-            padding: 2rem;
-        }
-
-        .project-info h3 {
-            font-size: 1.8rem;
-            color: #8b9cef;
-            margin-bottom: 1rem;
-        }
-
-        /* You can add your description text inside this p tag */
-        .project-info  p {
-            color: white;
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: #121212;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #e0e0e0;
             font-size: 1rem;
+            transition: border-color 0.3s;
         }
 
-        .project-button {
-            display: inline-block;
-            padding: 0.8rem 1.8rem;
-            margin-top: 1.5rem;
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            text-decoration: none;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
-            font-size: 0.9rem;
         }
 
-        .project-button:hover {
+        .submit-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
         }
 
         footer {
             background: #121212;
-            color: white;
+            color: #888;
             text-align: center;
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
@@ -163,37 +167,35 @@
         </ul>
     </nav>
 
-    <div class="content-container">
-        <h1>Our Projects</h1>
-        <p>Here's a selection of our recent work. More projects coming soon!</p>
-        
-        <div class="project-grid">
-            <!-- Project 1 -->
-            <div class="project-card">
-                <iframe src="https://envirinosynthquiz.vercel.app/" title="Envirino Synth Quiz Project"></iframe>
-                <div class="project-info">
-                    <h3>EnvirinoSynth.quiz</h3>
-                    <p>An AI quiz website about environment. To test your knowldege about environment</p>
-                    <button class="project-button" onclick="movetopage1()">View Project</button>
-                </div>
-            </div>
+    <div class="contact-container">
+        <header class="page-header">
+            <h1>Get In Touch</h1>
+            <p>We'd love to hear from you. Fill out the form below to start a conversation.</p>
+        </header>
 
-            <!-- Project 2 -->
-            <div class="project-card">
-                <iframe src="https://stemedtech.netlify.app/" title="StemEdtech"></iframe>
-                <div class="project-info">
-                    <h3>StemEdtech</h3>
-                    <p>A Website where you cn learn about Electronics and Iot devices in a simplifyed way</p>
-                    <button class="project-button" onclick="movetopage2()">View Project</button>
-                </div>
+        <form class="contact-form" action="mailto:kathir20san@gmail.com" method="post" enctype="text/plain">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="discord">Discord ID</label>
+                <input type="text" id="discord" name="discord">
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
     </div>
 
     <footer>
-        <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
+        <p>Email ID: kathir20san@gmail.com | Discord Team-Code: [Your Code Here]</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
