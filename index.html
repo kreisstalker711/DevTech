@@ -320,10 +320,15 @@
             align-items: center;
         }
 
+        .about-text {
+            transition: color 0.3s ease;
+        }
+
         .about-text h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: #e0e0e0;
+            transition: color 0.3s ease;
         }
 
         .about-text p {
@@ -451,13 +456,9 @@
     <section id="about" class="about">
         <div class="about-content">
             <div class="about-text">
-                <h2 class="animate-on-scroll">Why Choose Dev Tech?</h2>
-                <p class="animate-on-scroll" style="transition-delay: 0.1s;">At Dev Tech, we're passionate about creating web solutions that make a difference. Our team of experienced developers and designers work collaboratively to bring your vision to life.</p>
-                <p class="animate-on-scroll" style="transition-delay: 0.2s;">We combine creativity with technical expertise to deliver websites and applications that not only look great but perform exceptionally well. Your success is our mission.</p>
-                </div>
-            </div>
-            <div class="about-image">
-
+                <h2 class="color-change-text">Why Choose Dev Tech?</h2>
+                <p>At Dev Tech, we're passionate about creating web solutions that make a difference. Our team of experienced developers and designers work collaboratively to bring your vision to life.</p>
+                <p>We combine creativity with technical expertise to deliver websites and applications that not only look great but perform exceptionally well. Your success is our mission.</p>
             </div>
         </div>
     </section>
@@ -474,5 +475,26 @@
 
     </main>
     <script src="script.js"></script>
+    <script>
+        const colorText = document.querySelector('.color-change-text');
+        const colors = ['#667eea', '#764ba2', '#63b3ed', '#48bb78', '#ed64a6'];
+        let currentIndex = 0;
+
+        window.addEventListener('scroll', () => {
+            const rect = colorText.getBoundingClientRect();
+            const viewHeight = window.innerHeight;
+            
+            // Calculate how much of the element is visible
+            const visibility = (rect.bottom - rect.height) / viewHeight;
+            
+            if (visibility > 0 && visibility < 1) {
+                const colorIndex = Math.floor(visibility * colors.length);
+                if (colorIndex !== currentIndex && colorIndex < colors.length) {
+                    currentIndex = colorIndex;
+                    colorText.style.color = colors[currentIndex];
+                }
+            }
+        });
+    </script>
 </body>
 </html>
