@@ -18,6 +18,36 @@
             color: #e0e0e0;
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            z-index: 1100;
+            pointer-events: none;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #667eea;
+            transition: transform 0.2s;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        .cursor-grow {
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: rgba(118, 75, 162, 0.8);
+        }
+
+        a, button {
+            cursor: none;
         }
 
         .navbar {
@@ -42,6 +72,16 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                text-shadow: 0 0 5px rgba(102, 126, 234, 0.7), 0 0 10px rgba(102, 126, 234, 0.5), 0 0 15px rgba(118, 75, 162, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 10px rgba(102, 126, 234, 1), 0 0 20px rgba(102, 126, 234, 0.7), 0 0 30px rgba(118, 75, 162, 0.5);
+            }
         }
 
         .nav-links {
@@ -63,7 +103,6 @@
 
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -73,19 +112,89 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        /* Replaced video with an animated dark background that matches the page theme */
+        .bg-visual {
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveGrid 20s linear infinite;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            /* layered dark base with subtle color highlights */
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(102,126,234,0.10) 0%, rgba(118,75,162,0.06) 18%, transparent 28%),
+                radial-gradient(ellipse at 90% 80%, rgba(118,75,162,0.10) 0%, rgba(102,126,234,0.04) 18%, transparent 30%),
+                linear-gradient(180deg, #0e0e0e 0%, #121212 100%);
+            overflow: hidden;
         }
 
-        @keyframes moveGrid {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        /* subtle grid/noise overlay for texture */
+        .bg-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 120px 120px, 120px 120px;
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        /* soft blurred color blobs for depth */
+        .bg-visual .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            transform: translate3d(0,0,0);
+            opacity: 0.7;
+            mix-blend-mode: screen;
+        }
+
+        .bg-visual .b1 {
+            width: 52vmax;
+            height: 52vmax;
+            left: -10%;
+            top: -20%;
+            background: radial-gradient(circle at 30% 30%, rgba(102,126,234,0.30), rgba(102,126,234,0.08) 35%, transparent 60%);
+            animation: float1 18s ease-in-out infinite;
+        }
+
+        .bg-visual .b2 {
+            width: 40vmax;
+            height: 40vmax;
+            right: -15%;
+            top: 10%;
+            background: radial-gradient(circle at 70% 70%, rgba(118,75,162,0.28), rgba(118,75,162,0.06) 40%, transparent 65%);
+            animation: float2 22s ease-in-out infinite;
+        }
+
+        .bg-visual .b3 {
+            width: 30vmax;
+            height: 30vmax;
+            left: 20%;
+            bottom: -15%;
+            background: radial-gradient(circle at 40% 60%, rgba(102,126,234,0.18), rgba(118,75,162,0.06) 45%, transparent 70%);
+            animation: float3 26s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0% { transform: translate3d(0,0,0) scale(1); }
+            50% { transform: translate3d(6%,6%,0) scale(1.03); }
+            100% { transform: translate3d(0,0,0) scale(1); }
+        }
+
+        @keyframes float2 {
+            0% { transform: translate3d(0,0,0) scale(1); }
+            50% { transform: translate3d(-6%,4%,0) scale(0.98); }
+            100% { transform: translate3d(0,0,0) scale(1); }
+        }
+
+        @keyframes float3 {
+            0% { transform: translate3d(0,0,0) scale(1); }
+            50% { transform: translate3d(4%,-5%,0) scale(1.02); }
+            100% { transform: translate3d(0,0,0) scale(1); }
         }
 
         .hero-content {
@@ -96,26 +205,26 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            white-space: nowrap;
         }
 
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
             opacity: 0.95;
-            animation: fadeInUp 1s ease 0.2s backwards;
+            animation: trackingIn 1.2s ease-out 0.5s backwards;
         }
 
-        @keyframes fadeInUp {
+        @keyframes trackingIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                letter-spacing: 0.25em;
             }
             to {
-                opacity: 1;
-                transform: translateY(0);
+                opacity: 0.95;
+                letter-spacing: normal;
             }
         }
 
@@ -295,6 +404,9 @@
     </style>
 </head>
 <body>
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+
     <nav class="navbar">
         <a href="#home" class="logo">DevTech</a>
         <ul class="nav-links">
@@ -303,12 +415,19 @@
             <li><a href="projects.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
 
     <section id="home" class="hero">
+        <!-- Animated dark background visual (no external assets required) -->
+        <div class="bg-visual" aria-hidden="true">
+            <span class="blob b1"></span>
+            <span class="blob b2"></span>
+            <span class="blob b3"></span>
+        </div>
         <div class="hero-content">
-            <h1>Build Your Digital Future</h1>
+            <h1>We Build Websites That Are <span id="typing"></span></h1>
             <p>We craft exceptional web solutions that transform businesses and elevate user experiences</p>
             <a href="contact.html" class="cta-button">Get Started</a>
         </div>
@@ -338,5 +457,7 @@
     <footer>
         <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

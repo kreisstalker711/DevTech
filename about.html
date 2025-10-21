@@ -18,6 +18,109 @@
             color: #e0e0e0;
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
+            position: relative;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            z-index: 1100;
+            pointer-events: none;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #667eea;
+            transition: transform 0.2s;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        .cursor-grow {
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: rgba(118, 75, 162, 0.8);
+        }
+
+        a, button {
+            cursor: none;
+        }
+
+        .bg-visual {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(102,126,234,0.10) 0%, rgba(118,75,162,0.06) 18%, transparent 28%),
+                radial-gradient(ellipse at 90% 80%, rgba(118,75,162,0.10) 0%, rgba(102,126,234,0.04) 18%, transparent 30%),
+                linear-gradient(180deg, #0e0e0e 0%, #121212 100%);
+            overflow: hidden;
+        }
+
+        .bg-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 120px 120px, 120px 120px;
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        .bg-visual .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            transform: translate3d(0,0,0);
+            opacity: 0.7;
+            mix-blend-mode: screen;
+        }
+
+        .bg-visual .b1 {
+            width: 52vmax;
+            height: 52vmax;
+            left: -10%;
+            top: -20%;
+            background: radial-gradient(circle at 30% 30%, rgba(102,126,234,0.30), rgba(102,126,234,0.08) 35%, transparent 60%);
+            animation: float1 18s ease-in-out infinite;
+        }
+
+        .bg-visual .b2 {
+            width: 40vmax;
+            height: 40vmax;
+            right: -15%;
+            top: 10%;
+            background: radial-gradient(circle at 70% 70%, rgba(118,75,162,0.28), rgba(118,75,162,0.06) 40%, transparent 65%);
+            animation: float2 22s ease-in-out infinite;
+        }
+
+        .bg-visual .b3 {
+            width: 30vmax;
+            height: 30vmax;
+            left: 20%;
+            bottom: -15%;
+            background: radial-gradient(circle at 40% 60%, rgba(102,126,234,0.18), rgba(118,75,162,0.06) 45%, transparent 70%);
+            animation: float3 26s ease-in-out infinite;
+        }
+
+        @keyframes float1 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,6%,0) scale(1.03); } 100% { transform: translate3d(0,0,0) scale(1); } }
+        @keyframes float2 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-6%,4%,0) scale(0.98); } 100% { transform: translate3d(0,0,0) scale(1); } }
+        @keyframes float3 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(4%,-5%,0) scale(1.02); } 100% { transform: translate3d(0,0,0) scale(1); } }
+
+        main {
+            position: relative;
+            z-index: 1;
         }
 
         .navbar {
@@ -162,9 +265,35 @@
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
         }
+
+        /* Animation Styles */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-member {
+            transition-delay: inherit; /* Allow individual delays */
+        }
     </style>
 </head>
 <body>
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+
+    <div class="bg-visual" aria-hidden="true">
+        <span class="blob b1"></span>
+        <span class="blob b2"></span>
+        <span class="blob b3"></span>
+    </div>
+
+    <main>
     <nav class="navbar">
         <a href="index.html" class="logo">DevTech</a>
         <ul class="nav-links">
@@ -173,41 +302,42 @@
             <li><a href="projects.html">Projects</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
 
     <div class="about-container">
         <header class="page-header">
-            <h1>About Dev Tech</h1>
-            <p>The architects of your digital success.</p>
+            <h1 class="animate-on-scroll">About Dev Tech</h1>
+            <p class="animate-on-scroll" style="transition-delay: 0.1s;">The architects of your digital success.</p>
         </header>
 
-        <section class="about-section">
+        <section class="about-section animate-on-scroll" style="transition-delay: 0.2s;">
             <h2>Our Mission</h2>
             <p>To empower businesses by crafting innovative, high-performance, and user-centric web solutions. We strive to translate complex challenges into elegant digital experiences that drive growth and create lasting value for our clients.</p>
         </section>
 
-        <section class="about-section">
+        <section class="about-section animate-on-scroll" style="transition-delay: 0.3s;">
             <h2>Our Vision</h2>
             <p>To be a leading force in web development, recognized for our technical excellence, creative problem-solving, and unwavering commitment to client success. We envision a digital landscape where every business can achieve its full potential through powerful and accessible technology.</p>
         </section>
 
         <section class="team-section">
-            <h2>Meet Our Team</h2>
+            <h2 class="animate-on-scroll" style="transition-delay: 0.4s;">Meet Our Team</h2>
             <div class="team-grid">
-                <div class="team-member">
+                <div class="team-member animate-on-scroll" style="transition-delay: 0.5s;">
                     <h3>Kreis Stalker</h3>
                     <p class="role">Founder & President</p>
                 </div>
-                <div class="team-member">
+                <div class="team-member animate-on-scroll" style="transition-delay: 0.6s;">
                     <h3>Hawk.B</h3>
                     <p class="role">Vice President</p>
                 </div>
-                <div class="team-member">
+                <div class="team-member animate-on-scroll" style="transition-delay: 0.7s;">
                     <h3>Arc Johnson</h3>
                     <p class="role">Chief Design Officer</p>
                 </div>
-                <div class="team-member">
+                <div class="team-member animate-on-scroll" style="transition-delay: 0.8s;">
                     <h3>Ethan</h3>
                     <p class="role">UI/UX Designer</p>
                 </div>
@@ -219,5 +349,7 @@
         <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
     </footer>
 
+    <script src="script.js"></script>
+    </main>
 </body>
 </html>

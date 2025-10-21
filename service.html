@@ -18,6 +18,109 @@
             color: #e0e0e0;
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
+            position: relative;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            z-index: 1100;
+            pointer-events: none;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #667eea;
+            transition: transform 0.2s;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        .cursor-grow {
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: rgba(118, 75, 162, 0.8);
+        }
+
+        a, button {
+            cursor: none;
+        }
+
+        .bg-visual {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(102,126,234,0.10) 0%, rgba(118,75,162,0.06) 18%, transparent 28%),
+                radial-gradient(ellipse at 90% 80%, rgba(118,75,162,0.10) 0%, rgba(102,126,234,0.04) 18%, transparent 30%),
+                linear-gradient(180deg, #0e0e0e 0%, #121212 100%);
+            overflow: hidden;
+        }
+
+        .bg-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 120px 120px, 120px 120px;
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        .bg-visual .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            transform: translate3d(0,0,0);
+            opacity: 0.7;
+            mix-blend-mode: screen;
+        }
+
+        .bg-visual .b1 {
+            width: 52vmax;
+            height: 52vmax;
+            left: -10%;
+            top: -20%;
+            background: radial-gradient(circle at 30% 30%, rgba(102,126,234,0.30), rgba(102,126,234,0.08) 35%, transparent 60%);
+            animation: float1 18s ease-in-out infinite;
+        }
+
+        .bg-visual .b2 {
+            width: 40vmax;
+            height: 40vmax;
+            right: -15%;
+            top: 10%;
+            background: radial-gradient(circle at 70% 70%, rgba(118,75,162,0.28), rgba(118,75,162,0.06) 40%, transparent 65%);
+            animation: float2 22s ease-in-out infinite;
+        }
+
+        .bg-visual .b3 {
+            width: 30vmax;
+            height: 30vmax;
+            left: 20%;
+            bottom: -15%;
+            background: radial-gradient(circle at 40% 60%, rgba(102,126,234,0.18), rgba(118,75,162,0.06) 45%, transparent 70%);
+            animation: float3 26s ease-in-out infinite;
+        }
+
+        @keyframes float1 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,6%,0) scale(1.03); } 100% { transform: translate3d(0,0,0) scale(1); } }
+        @keyframes float2 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-6%,4%,0) scale(0.98); } 100% { transform: translate3d(0,0,0) scale(1); } }
+        @keyframes float3 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(4%,-5%,0) scale(1.02); } 100% { transform: translate3d(0,0,0) scale(1); } }
+
+        main {
+            position: relative;
+            z-index: 1;
         }
         
         .navbar {
@@ -81,21 +184,29 @@
         }
 
         .service-card {
-            background: #1E1E1E;
+            background: #121212; /* Matching the main page background */
             padding: 2rem;
-            border-radius: 15px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px; 
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
             border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .service-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.15) rotate(-8deg);
         }
 
         .service-card h3 {
@@ -151,6 +262,16 @@
     </style>
 </head>
 <body>
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+
+    <div class="bg-visual" aria-hidden="true">
+        <span class="blob b1"></span>
+        <span class="blob b2"></span>
+        <span class="blob b3"></span>
+    </div>
+
+   <main>
    <nav class="navbar">
        <a href="index.html" class="logo">DevTech</a>
        <ul class="nav-links">
@@ -159,6 +280,7 @@
            <li><a href="projects.html">Projects</a></li>
            <li><a href="about.html">About</a></li>
            <li><a href="contact.html">Contact</a></li>
+           <li><a href="login.html">Login</a></li>
        </ul>
    </nav>
    
@@ -175,6 +297,16 @@
                <h3>Web Development</h3>
                <p>Building robust, scalable web applications using cutting-edge technologies and best practices.</p>
            </div>
+           <div class="service-card">
+               <div class="service-icon">🛒</div>
+               <h3>SEO Management </h3>
+               <p>Improving your site's visibility on search engines to attract more organic traffic and grow your audience.</p>
+           </div>
+           <div class="service-card">
+               <div class="service-icon">🚀</div>
+               <h3>Web Animation</h3>
+               <p>Creative Interactive animations with CSS.Enhancing the look of the website more professional</p>
+           </div>
        </div>
    </section>
 
@@ -187,5 +319,8 @@
     <footer>
         <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
     </footer>
+
+   <script src="script.js"></script>
+   </main>
 </body>
 </html>
