@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Our Community - Dev Tech</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #121212; /* Classic Dark Charcoal */
+            overflow-x: hidden;
+            position: relative;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            z-index: 1100;
+            pointer-events: none;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #667eea;
+            transition: transform 0.2s;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        .cursor-grow {
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: rgba(118, 75, 162, 0.8);
+        }
+
+        a, button {
+            cursor: none;
+        }
+
+        .bg-visual {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(102,126,234,0.10) 0%, rgba(118,75,162,0.06) 18%, transparent 28%),
+                radial-gradient(ellipse at 90% 80%, rgba(118,75,162,0.10) 0%, rgba(102,126,234,0.04) 18%, transparent 30%),
+                linear-gradient(180deg, #0e0e0e 0%, #121212 100%);
+            overflow: hidden;
+        }
+
+        .bg-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 120px 120px, 120px 120px;
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        .bg-visual .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            transform: translate3d(0,0,0);
+            opacity: 0.7;
+            mix-blend-mode: screen;
+        }
+
+        .bg-visual .b1 {
+            width: 52vmax;
+            height: 52vmax;
+            left: -10%;
+            top: -20%;
+            background: radial-gradient(circle at 30% 30%, rgba(102,126,234,0.30), rgba(102,126,234,0.08) 35%, transparent 60%);
+            animation: float1 18s ease-in-out infinite;
+        }
+
+        .bg-visual .b2 {
+            width: 40vmax;
+            height: 40vmax;
+            right: -15%;
+            top: 10%;
+            background: radial-gradient(circle at 70% 70%, rgba(118,75,162,0.28), rgba(118,75,162,0.06) 40%, transparent 65%);
+            animation: float2 22s ease-in-out infinite;
+        }
+
+        .bg-visual .b3 {
+            width: 30vmax;
+            height: 30vmax;
+            left: 20%;
+            bottom: -15%;
+            background: radial-gradient(circle at 40% 60%, rgba(102,126,234,0.18), rgba(118,75,162,0.06) 45%, transparent 70%);
+            animation: float3 26s ease-in-out infinite;
+        }
+
+        @keyframes float1 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,6%,0) scale(1.03); } 100% { transform: translate3d(0,0,0) scale(1); } }
+        @keyframes float2 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-6%,4%,0) scale(0.98); } 100% { transform: translate3d(0,0,0) scale(1); } }
+        @keyframes float3 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(4%,-5%,0) scale(1.02); } 100% { transform: translate3d(0,0,0) scale(1); } }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .join-container {
+            padding: 8rem 5% 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        .join-form {
+            background: #1E1E1E;
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #b0b0b0;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: #121212;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group.checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .form-group.checkbox input {
+            width: auto;
+        }
+
+        .form-group.checkbox label {
+            margin-bottom: 0;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        /* Success Message Styling */
+        #success-message {
+            display: none; /* Hidden by default */
+            text-align: center;
+            background: #1E1E1E;
+            padding: 4rem 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        #success-message h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #8b9cef;
+        }
+
+        #success-message p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: #121212;
+            color: #888;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+
+    <div class="bg-visual" aria-hidden="true">
+        <span class="blob b1"></span>
+        <span class="blob b2"></span>
+        <span class="blob b3"></span>
+    </div>
+
+    <main>
+    <nav class="navbar">
+        <a href="index.html" class="logo">DevTech</a>
+        <ul class="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="join-container">
+        <header class="page-header">
+            <h1>Join Our Community</h1>
+            <p>Become a part of the Dev Tech family. Connect, learn, and grow with us.</p>
+        </header>
+
+        <!-- The form will be replaced by the success message after submission -->
+        <div id="form-container">
+            <form id="join-form" class="join-form" action="https://formspree.io/f/myyqnyza" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="discord">Discord ID (e.g., username#1234)</label>
+                    <input type="text" id="discord" name="discord">
+                </div>
+                <div class="form-group">
+                    <label for="interest">Primary Area of Interest</label>
+                    <select id="interest" name="interest">
+                        <option value="development">Web Development</option>
+                        <option value="design">Web Design & UI/UX</option>
+                        <option value="seo">SEO & Marketing</option>
+                        <option value="animation">Web Animation</option>
+                        <option value="general">General Interest</option>
+                    </select>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="guidelines" name="guidelines" required>
+                    <label for="guidelines">I agree to the community guidelines.</label>
+                </div>
+                <button type="submit" class="submit-button">Join Now</button>
+            </form>
+        </div>
+
+        <!-- Success Message - Hidden by default -->
+        <div id="success-message">
+            <h2>Welcome to DevTech!</h2>
+            <p>You are now a member. We're excited to have you with us!</p>
+            <a href="index.html" class="submit-button" style="text-decoration: none; text-align: center; display: inline-block; width: auto; padding: 1rem 2.5rem;">Go to Homepage</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Email ID: kathir20san@gmail.com | Discord Team-Code: [Your Code Here]</p>
+    </footer>
+
+    <script>
+        // This script handles the form submission
+        var form = document.getElementById("join-form");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var data = new FormData(event.target);
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                document.getElementById("form-container").style.display = "none";
+                document.getElementById("success-message").style.display = "block";
+            }).catch(error => alert("Oops! There was a problem submitting your form."));
+        }
+        form.addEventListener("submit", handleSubmit)
+    </script>
+    <script src="script.js"></script> <!-- Keep for cursor and other global scripts -->
+    </main>
+</body>
+</html>
