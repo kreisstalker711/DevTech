@@ -76,3 +76,6 @@ function movetopage1() {
 function movetopage2() {
     window.location.href = "https://stemedtech.netlify.app/";
 }
+function movetopage3() {
+    window.location.href = "https://whereweworkinc.netlify.app/";
+}

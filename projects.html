@@ -277,7 +277,8 @@
 
         /* Staggered animation delays */
         .project-card:nth-child(1) { transition-delay: 0.2s; }
-        .project-card:nth-child(2) { transition-delay: 0.4s; }
+        .project-card:nth-child(2) { transition-delay: 0.3s; }
+        .project-card:nth-child(3) { transition-delay: 0.4s; }
         
     </style>
 </head>
@@ -297,8 +298,8 @@
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
             <li><a href="service.html">Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Our Works</a></li>
+            <li><a href="about.html">Our Story</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
@@ -311,6 +312,16 @@
         <div class="project-grid">
             <!-- Project 1 -->
             <div class="project-card animate-on-scroll">
+                <iframe src="https://whereweworkinc.netlify.app/" title="Where We Work Inc. Project"></iframe>
+                <div class="project-info">
+                    <h3>Where We Work Inc.</h3>
+                    <p>A modern, responsive website for a co-working space, showcasing amenities, plans, and location.</p>
+                    <button class="project-button" onclick="movetopage3()">View Live Project</button>
+                </div>
+            </div>
+
+            <!-- Project 1 -->
+            <div class="project-card animate-on-scroll" style="transition-delay: 0.3s;">
                 <iframe src="https://envirinosynthquiz.vercel.app/" title="Envirino Synth Quiz Project"></iframe>
                 <div class="project-info">
                     <h3>EnvirinoSynth.quiz</h3>
@@ -320,7 +331,7 @@
             </div>
 
             <!-- Project 2 -->
-            <div class="project-card animate-on-scroll">
+            <div class="project-card animate-on-scroll" style="transition-delay: 0.4s;">
                 <iframe src="https://stemedtech.netlify.app/" title="StemEdtech"></iframe>
                 <div class="project-info">
                     <h3>StemEdtech</h3>
