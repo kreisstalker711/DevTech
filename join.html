@@ -237,6 +237,25 @@
             border-color: #667eea;
         }
 
+        .form-group input[type="file"] {
+            padding: 0.5rem;
+        }
+
+        /* Style the file input button to match the theme */
+        .form-group input[type="file"]::-webkit-file-upload-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 80%);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            margin-right: 1rem;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: filter 0.3s;
+        }
+        .form-group input[type="file"]::-webkit-file-upload-button:hover {
+            filter: brightness(1.2);
+        }
+
         .form-group.checkbox {
             display: flex;
             align-items: center;
@@ -354,6 +373,11 @@
                         <option value="general">General Interest</option>
                     </select>
                 </div>
+            <div class="form-group">
+                <label for="upload">Upload Resume/Projects (Optional)</label>
+                <!-- Note: File uploads require a paid Formspree plan -->
+                <input type="file" id="upload" name="upload" accept=".pdf,.doc,.docx,.zip,image/*">
+            </div>
                 <div class="form-group checkbox">
                     <input type="checkbox" id="guidelines" name="guidelines" required>
                     <label for="guidelines">I agree to the community guidelines.</label>
