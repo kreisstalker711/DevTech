@@ -18,9 +18,10 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.7; /* Increased for better spacing with larger fonts */
             /* brighter, more readable primary text on dark background */
+            font-size: 17px; /* Increased base font size for better readability */
             color: #EAF2FF;
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
@@ -244,17 +245,18 @@
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 3.2rem; /* Made hero heading significantly larger */
             margin-bottom: 1rem;
             white-space: nowrap; /* Keeps the h1 on one line */
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); /* Enhanced shadow for readability */
             font-family: 'Roboto Mono', monospace;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.4rem; /* Increased hero paragraph size */
             margin-bottom: 2rem;
             opacity: 0.95;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); /* Added shadow for readability */
             color: #F8FBFF; /* bright, readable on hero overlay */
             animation: trackingIn 1.2s ease-out 0.5s backwards;
         }
@@ -298,7 +300,7 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem; /* Increased section title size */
             margin-bottom: 3rem; 
             color: #f0f0f0;
         }
@@ -340,7 +342,8 @@
         }
 
         .service-card p {
-            color: #C9D9FF; /* cleaner, readable paragraph color */
+            color: #C9D9FF;
+            font-size: 1.05rem; /* Slightly larger text in cards */
         }
 
         .about {
@@ -359,6 +362,20 @@
         .about-text {
             transition: color 0.3s ease;
         }
+
+        .about-text h2 {
+            font-size: 2.8rem; /* Increased heading size */
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7); /* Stronger shadow for readability */
+        }
+
+        .about-text p {
+            font-size: 1.7rem; /* Increased paragraph font size */
+            color: #DCE1E9;
+            opacity: 0.95;/* A brighter, clearer white */
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* Enhanced shadow for readability */
+            line-height: 1.8;
+        }
         /* typing-reveal (per-character) styles */
         .reveal-typing { display:inline-block; white-space:pre-wrap; }
         .reveal-typing .char { display:inline-block; opacity:0; transform: translateY(8px); }
@@ -372,11 +389,11 @@
             .typing-caret { display:none; }
         }
 
-        .stats {
+        .stats-section {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 4rem;
         }
 
         .stat-item {
@@ -384,14 +401,18 @@
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 3rem; /* Larger stat numbers */
             font-weight: 700;
-            color: #667eea;
+            background: linear-gradient(135deg, #DCE1E9 0%, #c507f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .stat-label {
-            color: #C9D9FF; /* readable stat labels */
-            margin-top: 0.5rem;
+        .stat-label { 
+            color: #C9D9FF; 
+            margin-top: 0.5rem; 
+            font-size: 1.05rem;
         }
 
         .contact {
@@ -402,15 +423,16 @@
         }
 
         .contact h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem; /* Increased contact heading size */
             margin-bottom: 1rem;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .contact p {
-            font-size: 1.2rem;
+            font-size: 1.3rem; /* Increased contact paragraph size */
             margin-bottom: 2rem;
             opacity: 0.95;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
             color: #F6FAFF; /* ensure contrast on gradient contact section */
         }
 
@@ -447,7 +469,7 @@
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem; /* Adjusted for mobile */
             }
 
             .nav-links {
@@ -459,7 +481,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .stats {
+            .stats-section {
                 grid-template-columns: 1fr;
             }
         }
@@ -488,29 +510,47 @@
         </button>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <video autoplay loop muted playsinline id="hero-video" src="videos/bgvideo.mp4"></video>
-        <div class="hero-content">
-            <h1>We Build Websites That Are <span id="typing" style="color: #2c49cb"></span></h1>
-            <p>We craft exceptional web solutions that transform businesses and elevate user experiences</p>
-            <a href="contact.html" class="cta-button">Get Started</a>
-        </div>
-    </section>
-
-
     <div class="video-section-bg">
         <div class="section-overlay"></div>
         <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
+
+        <section id="home" class="hero">
+            <!-- The hero-overlay is now part of the main section-overlay -->
+            <div class="hero-content">
+                <h1>We Build Websites That Are <span id="typing" style="color: #3c2ccb"></span></h1>
+                <p>We craft exceptional web solutions that transform businesses and elevate user experiences</p>
+                <a href="contact.html" class="cta-button">Get Started</a>
+            </div>
+        </section>
+
         <section id="about" class="about">
             <div class="about-content">
                 <div class="about-text">
                     <h2 class="color-change-text">Why Choose Dev Tech?</h2>
-                    <p>At Dev Tech, we're passionate about creating web solutions that make a difference. Our team of experienced developers and designers work collaboratively to bring your vision to life.</p>
+                    <p>At Dev Tech, we're passionate about creating web solutions that make a difference. Our team of experienced developers and designers work collaboratively to bring your vision to life.</p> 
                     <p>We combine creativity with technical expertise to deliver websites and applications that not only look great but perform exceptionally well. Your success is our mission.</p>
                 </div>
-                <!-- This div is empty, you might want to add an image or graphic here in the future -->
                 <div></div>
+            </div>
+        </section>
+
+        <section id="stats" class="about"> <!-- Reusing .about for padding and max-width -->
+            <div class="stats-container">
+                <h2 class="section-title" style="color: #EAF2FF;">Our Achievements</h2>
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="3">0</span><span>+</span>
+                        <p class="stat-label">Projects Completed</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="5">0</span><span>+</span>
+                        <p class="stat-label">Technologies Used</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="2">0</span><span>+</span>
+                        <p class="stat-label">Years of Experience</p>
+                    </div>
+                </div>
             </div>
         </section>
         <section id="contact" class="contact">
@@ -606,6 +646,44 @@
             }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
             els.forEach(el => obs.observe(el));
         })();
+    </script>
+    <script>
+        // Animated Counters
+        const statsSection = document.getElementById('stats');
+        const counters = document.querySelectorAll('.stat-number');
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // Calculate increment per frame
+
+                const updateCount = () => {
+                    count += increment;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
     </script>
 </body>
 </html>
