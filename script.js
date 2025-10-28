@@ -68,6 +68,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     elementsToAnimate.forEach(el => {
         observer.observe(el);
     });
+
+    // New reveal-on-scroll observer for the '.reveal' class
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    const elementsToReveal = document.querySelectorAll('.reveal');
+    elementsToReveal.forEach(el => {
+        revealObserver.observe(el);
+    });
 });
 
 function movetopage1() {

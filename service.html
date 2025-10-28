@@ -192,8 +192,8 @@
         
         .contact {
             padding: 5rem 5%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: transparent; /* Allow video background to show through */
+            color: #e0e0e0;
             text-align: center;
         }
 
@@ -211,21 +211,26 @@
         .contact-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: white;
-            color: #667eea;
+            background: rgba(255, 255, 255, 0.1); /* Glass effect */
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #f0f0f0;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .contact-button:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
         footer {
-            background: #121212;
-            color: white;
+            background: transparent; /* Allow video background to show through */
+            color: #e0e0e0;
             text-align: center;
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
@@ -241,14 +246,6 @@
         .reveal.visible { opacity: 1; transform: translateY(0); }
         @media (prefers-reduced-motion: reduce) { .reveal, .reveal.visible { transition: none; transform: none; opacity: 1; } }
 
-        /* typing-reveal (per-character) styles */
-        .reveal-typing { display:inline-block; white-space:pre-wrap; }
-        .reveal-typing .char { display:inline-block; opacity:0; transform: translateY(8px); }
-        .reveal-typing .char.animated { opacity:1; transform: translateY(0); }
-        .typing-caret { display:inline-block; width:2px; height:1em; margin-left:6px; background:#8fb0ff; vertical-align:middle; animation: blink 1s steps(2,start) infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-        @keyframes charFade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-        @media (prefers-reduced-motion: reduce) { .reveal-typing .char { opacity:1 !important; transform:none !important; } .typing-caret { display:none; } }
     </style>
 </head>
 <body>
@@ -273,29 +270,29 @@
    </nav>
    
    <section id="services" class="services">
-       <h2 class="section-title reveal-typing">Our Services</h2>
+       <h2 class="section-title reveal">Our Services</h2>
        <div class="services-grid">
-           <div class="service-card">
+           <div class="service-card reveal">
                <div class="service-icon">🎨</div>
                <h3>Web Design</h3>
                <p>Creating stunning, user-friendly interfaces that captivate your audience and drive engagement.</p>
            </div>
-           <div class="service-card">
+           <div class="service-card reveal">
                <div class="service-icon">💻</div>
                <h3>Web Development</h3>
                <p>Building robust, scalable web applications using cutting-edge technologies and best practices.</p>
            </div>
-           <div class="service-card">
+           <div class="service-card reveal">
                <div class="service-icon">🛒</div>
                <h3>SEO Management </h3>
                <p>Improving your site's visibility on search engines to attract more organic traffic and grow your audience.</p>
            </div>
-           <div class="service-card">
+           <div class="service-card reveal">
                <div class="service-icon">🌐</div>
                <h3>Domain & Email Management</h3>
                <p>Setting up professional email addresses and managing your website's domain for a seamless online presence.</p>
            </div>
-           <div class="service-card">
+           <div class="service-card reveal">
                <div class="service-icon">⚛️</div>
                <h3>Web App Development - React.js</h3>
                <p>Building powerful, fast, and dynamic single-page applications (SPAs) with the React.js library.</p>
@@ -328,38 +325,6 @@
 				});
 			}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 			els.forEach(el => obs.observe(el));
-		})();
-	</script>
-	<script>
-		/* prepare reveal-typing elements and trigger on-scroll with stagger */
-		(function(){
-			if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-			const els = document.querySelectorAll('.reveal-typing');
-			els.forEach(el=>{
-				if (el.dataset._typingPrepared) return;
-				el.dataset._typingPrepared = '1';
-				const text = el.textContent;
-				el.textContent = '';
-				for (let i=0;i<text.length;i++){
-					const s = document.createElement('span');
-					s.className = 'char';
-					s.textContent = text[i];
-					el.appendChild(s);
-				}
-				const caret = document.createElement('span'); caret.className='typing-caret'; el.appendChild(caret);
-			});
-			const io = new IntersectionObserver((entries)=>{
-				entries.forEach(entry=>{
-					if (!entry.isIntersecting) return;
-					const el = entry.target;
-					const chars = el.querySelectorAll('.char');
-					chars.forEach((c,i)=> c.style.animation = `charFade 360ms forwards ${i*28}ms`);
-					const caret = el.querySelector('.typing-caret');
-					if (caret) setTimeout(()=> caret.remove(), chars.length * 28 + 420);
-					io.unobserve(el);
-				});
-			}, {threshold:0.05});
-			els.forEach(e=>io.observe(e));
 		})();
 	</script>
    </main>
