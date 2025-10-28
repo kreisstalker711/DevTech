@@ -83,6 +83,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     elementsToReveal.forEach(el => {
         revealObserver.observe(el);
     });
+
+    // Mobile Navigation (Hamburger Menu)
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
 });
 
 function movetopage1() {
