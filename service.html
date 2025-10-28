@@ -51,67 +51,26 @@
             cursor: none;
         }
 
-        .bg-visual {
+        .video-background-container {
             position: fixed;
             inset: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            background:
-                radial-gradient(ellipse at 10% 20%, rgba(102,126,234,0.10) 0%, rgba(118,75,162,0.06) 18%, transparent 28%),
-                radial-gradient(ellipse at 90% 80%, rgba(118,75,162,0.10) 0%, rgba(102,126,234,0.04) 18%, transparent 30%),
-                linear-gradient(180deg, #0e0e0e 0%, #121212 100%);
             overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
         }
 
-        .bg-visual::before {
-            content: "";
+        .background-video {
             position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(180deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 120px 120px, 120px 120px;
-            opacity: 0.04;
-            mix-blend-mode: overlay;
-            pointer-events: none;
-        }
-
-        .bg-visual .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            transform: translate3d(0,0,0);
-            opacity: 0.7;
-            mix-blend-mode: screen;
-        }
-
-        .bg-visual .b1 {
-            width: 52vmax;
-            height: 52vmax;
-            left: -10%;
-            top: -20%;
-            background: radial-gradient(circle at 30% 30%, rgba(102,126,234,0.30), rgba(102,126,234,0.08) 35%, transparent 60%);
-            animation: float1 18s ease-in-out infinite;
-        }
-
-        .bg-visual .b2 {
-            width: 40vmax;
-            height: 40vmax;
-            right: -15%;
-            top: 10%;
-            background: radial-gradient(circle at 70% 70%, rgba(118,75,162,0.28), rgba(118,75,162,0.06) 40%, transparent 65%);
-            animation: float2 22s ease-in-out infinite;
-        }
-
-        .bg-visual .b3 {
-            width: 30vmax;
-            height: 30vmax;
-            left: 20%;
-            bottom: -15%;
-            background: radial-gradient(circle at 40% 60%, rgba(102,126,234,0.18), rgba(118,75,162,0.06) 45%, transparent 70%);
-            animation: float3 26s ease-in-out infinite;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
 
         @keyframes float1 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,6%,0) scale(1.03); } 100% { transform: translate3d(0,0,0) scale(1); } }
@@ -194,16 +153,18 @@
         }
 
         .service-card {
-            background: #121212; /* Matching the main page background */
+            background: rgba(255, 255, 255, 0.05); /* Glass effect */
+            backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 15px; 
-            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
             border: 1px solid rgba(102, 126, 234, 0.1);
             position: relative;
             overflow: hidden;
         }
 
         .service-card:hover {
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
             border-color: rgba(102, 126, 234, 0.5);
@@ -269,18 +230,34 @@
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
         }
+
+        /* reveal-on-scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .reveal, .reveal.visible { transition: none; transform: none; opacity: 1; } }
+
+        /* typing-reveal (per-character) styles */
+        .reveal-typing { display:inline-block; white-space:pre-wrap; }
+        .reveal-typing .char { display:inline-block; opacity:0; transform: translateY(8px); }
+        .reveal-typing .char.animated { opacity:1; transform: translateY(0); }
+        .typing-caret { display:inline-block; width:2px; height:1em; margin-left:6px; background:#8fb0ff; vertical-align:middle; animation: blink 1s steps(2,start) infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes charFade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        @media (prefers-reduced-motion: reduce) { .reveal-typing .char { opacity:1 !important; transform:none !important; } .typing-caret { display:none; } }
     </style>
 </head>
 <body>
     <div class="cursor cursor-dot"></div>
     <div class="cursor cursor-outline"></div>
 
-    <div class="bg-visual" aria-hidden="true">
-        <span class="blob b1"></span>
-        <span class="blob b2"></span>
-        <span class="blob b3"></span>
+    <div class="video-background-container">
+        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
     </div>
-
    <main>
    <nav class="navbar">
        <a href="index.html" class="logo">DevTech</a>
@@ -296,7 +273,7 @@
    </nav>
    
    <section id="services" class="services">
-       <h2 class="section-title">Our Services</h2>
+       <h2 class="section-title reveal-typing">Our Services</h2>
        <div class="services-grid">
            <div class="service-card">
                <div class="service-icon">🎨</div>
@@ -337,6 +314,54 @@
     </footer>
 
    <script src="script.js"></script>
+   <script>
+		(function(){
+			if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+			const els = document.querySelectorAll('.reveal');
+			if (!els.length) return;
+			const obs = new IntersectionObserver((entries) => {
+				entries.forEach(e => {
+					if (e.isIntersecting) {
+						e.target.classList.add('visible');
+						obs.unobserve(e.target);
+					}
+				});
+			}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+			els.forEach(el => obs.observe(el));
+		})();
+	</script>
+	<script>
+		/* prepare reveal-typing elements and trigger on-scroll with stagger */
+		(function(){
+			if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+			const els = document.querySelectorAll('.reveal-typing');
+			els.forEach(el=>{
+				if (el.dataset._typingPrepared) return;
+				el.dataset._typingPrepared = '1';
+				const text = el.textContent;
+				el.textContent = '';
+				for (let i=0;i<text.length;i++){
+					const s = document.createElement('span');
+					s.className = 'char';
+					s.textContent = text[i];
+					el.appendChild(s);
+				}
+				const caret = document.createElement('span'); caret.className='typing-caret'; el.appendChild(caret);
+			});
+			const io = new IntersectionObserver((entries)=>{
+				entries.forEach(entry=>{
+					if (!entry.isIntersecting) return;
+					const el = entry.target;
+					const chars = el.querySelectorAll('.char');
+					chars.forEach((c,i)=> c.style.animation = `charFade 360ms forwards ${i*28}ms`);
+					const caret = el.querySelector('.typing-caret');
+					if (caret) setTimeout(()=> caret.remove(), chars.length * 28 + 420);
+					io.unobserve(el);
+				});
+			}, {threshold:0.05});
+			els.forEach(e=>io.observe(e));
+		})();
+	</script>
    </main>
 </body>
 </html>

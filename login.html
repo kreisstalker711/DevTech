@@ -1,318 +1,507 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Dev Tech</title>
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: #e0e0e0;
-        background: #121212;
-        overflow-x: hidden;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        cursor: none;
-    }
-
-    /* Custom Cursor */
-    .cursor {
-        position: fixed;
-        z-index: 1100;
-        pointer-events: none;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-    }
-    .cursor-dot {
-        width: 8px;
-        height: 8px;
-        background-color: #667eea;
-        transition: transform 0.2s;
-    }
-    .cursor-outline {
-        width: 40px;
-        height: 40px;
-        border: 2px solid rgba(102, 126, 234, 0.5);
-        transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
-    }
-    .cursor-grow {
-        transform: translate(-50%, -50%) scale(1.5);
-        border-color: rgba(118, 75, 162, 0.8);
-    }
-
-    a, button {
-        cursor: none;
-    }
-
-    .bg-visual {
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-        background:
-            radial-gradient(ellipse at 10% 20%, rgba(102,126,234,0.10) 0%, rgba(118,75,162,0.06) 18%, transparent 28%),
-            radial-gradient(ellipse at 90% 80%, rgba(118,75,162,0.10) 0%, rgba(102,126,234,0.04) 18%, transparent 30%),
-            linear-gradient(180deg, #0e0e0e 0%, #121212 100%);
-        overflow: hidden;
-    }
-
-    .bg-visual::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
-            linear-gradient(180deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-        background-size: 120px 120px, 120px 120px;
-        opacity: 0.04;
-        mix-blend-mode: overlay;
-        pointer-events: none;
-    }
-
-    .bg-visual .blob {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        transform: translate3d(0,0,0);
-        opacity: 0.7;
-        mix-blend-mode: screen;
-    }
-
-    .bg-visual .b1 {
-        width: 52vmax;
-        height: 52vmax;
-        left: -10%;
-        top: -20%;
-        background: radial-gradient(circle at 30% 30%, rgba(102,126,234,0.30), rgba(102,126,234,0.08) 35%, transparent 60%);
-        animation: float1 18s ease-in-out infinite;
-    }
-
-    .bg-visual .b2 {
-        width: 40vmax;
-        height: 40vmax;
-        right: -15%;
-        top: 10%;
-        background: radial-gradient(circle at 70% 70%, rgba(118,75,162,0.28), rgba(118,75,162,0.06) 40%, transparent 65%);
-        animation: float2 22s ease-in-out infinite;
-    }
-
-    .bg-visual .b3 {
-        width: 30vmax;
-        height: 30vmax;
-        left: 20%;
-        bottom: -15%;
-        background: radial-gradient(circle at 40% 60%, rgba(102,126,234,0.18), rgba(118,75,162,0.06) 45%, transparent 70%);
-        animation: float3 26s ease-in-out infinite;
-    }
-
-    @keyframes float1 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,6%,0) scale(1.03); } 100% { transform: translate3d(0,0,0) scale(1); } }
-    @keyframes float2 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-6%,4%,0) scale(0.98); } 100% { transform: translate3d(0,0,0) scale(1); } }
-    @keyframes float3 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(4%,-5%,0) scale(1.02); } 100% { transform: translate3d(0,0,0) scale(1); } }
-
-    main {
-        position: relative;
-        z-index: 1;
-    }
-
-    .navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(18, 18, 18, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 1rem 6%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .logo {
-        font-size: 1.8rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-decoration: none;
-        animation: logoGlow 4s ease-in-out infinite;
-    }
-
-    @keyframes logoGlow {
-        0%, 100% {
-            text-shadow: 0 0 8px rgba(102, 126, 234, 0.5), 0 0 16px rgba(118, 75, 162, 0.4);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DevTech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        50% {
-            text-shadow: 0 0 16px rgba(102, 126, 234, 0.8), 0 0 32px rgba(118, 75, 162, 0.6);
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
-    }
 
-    .nav-links {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-    }
+        /* Background Video */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
 
-    .nav-links a {
-        text-decoration: none;
-        color: #e0e0e0;
-        font-weight: 500;
-        transition: color 0.3s;
-    }
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
 
-    .nav-links a:hover {
-        color: #667eea;
-    }
+        /* Navigation - Consistent with other pages */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(8, 9, 11, 0.95); /* darker, matches site dark theme */
+            backdrop-filter: blur(10px);
+            padding: 1rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        }
 
-    /* From Uiverse.io by alexruix - with modifications */ 
-.card {
- max-width: 500px;
- width: 100%;
- padding: 3rem 2.5rem;
- text-align: center;
- background: #2a2b38;
- border-radius: 15px;
- border: 1px solid rgba(255, 235, 167, 0.1);
- animation: glow 4s ease-in-out infinite;
-}
+        /* ensure the nav links align properly and don't wrap unexpectedly */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+        }
 
-/*Inputs*/
-.field {
- margin-top: 1rem;
- display: flex;
- align-items: center;
- justify-content: center;
- gap: .5em;
- background-color: #1f2029;
- border-radius: 4px;
- padding: .5em 1em;
-}
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);            
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            animation: logoGlow 4s ease-in-out infinite;
+            display: inline-block;
+            text-decoration: none;
+        }
 
-.input-icon {
- height: 1em;
- width: 1em;
- fill: #ffeba7;
-}
+        @keyframes logoGlow {
+            0%, 100% {
+                text-shadow: 0 0 8px rgba(102, 126, 234, 0.5), 0 0 16px rgba(118, 75, 162, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 16px rgba(102, 126, 234, 0.8), 0 0 32px rgba(118, 75, 162, 0.6);
+            }
+        }
 
-.input-field {
- background: none;
- border: none;
- outline: none;
- width: 100%;
- color: #d3d3d3;
-}
+        .nav-links a {
+            text-decoration: none;
+            color: #f0f0f0;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
 
-/*Text*/
-.title {
- margin-bottom: 1.5rem;
- font-size: 1.8em;
- font-weight: 500;
- color: #f5f5f5;
-}
+        .nav-links a:hover {
+            color: #667eea;
+        }
 
-/*Buttons*/
-.btn {
- margin: 1.5rem;
- border: none;
- border-radius: 4px;
- font-weight: bold;
- font-size: .8em;
- text-transform: uppercase;
- padding: 0.6em 1.2em;
- background-color: #ffeba7;
- color: #5e6681;
- box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
- transition: all .3s ease-in-out;
-}
+        /* Main Container */
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
 
-.btn-link {
- color: #f5f5f5;
- display: block;
- font-size: .75em;
- transition: color .3s ease-out;
-}
+        /* Login Card - NEW MODERN DESIGN */
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-/*Hover & focus*/
-.field input:focus::placeholder {
- opacity: 0;
- transition: opacity .3s;
-}
+        /* typing-reveal (per-character) styles */
+        .reveal-typing { display:inline-block; white-space:pre-wrap; }
+        .reveal-typing .char { display:inline-block; opacity:0; transform: translateY(8px); }
+        .typing-caret { display:inline-block; width:2px; height:1em; margin-left:6px; background:#667eea; vertical-align:middle; animation: blink 1s steps(2,start) infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes charFade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        @media (prefers-reduced-motion: reduce) { .reveal-typing .char { opacity:1 !important; transform:none !important; } .typing-caret { display:none; } }
 
-.btn:hover {
- background-color: #5e6681;
- color: #ffeba7;
- box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
-}
+        /* reveal-on-scroll */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; will-change: transform, opacity; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .reveal, .reveal.visible { transition: none; transform: none; opacity: 1; } }
 
-.btn-link:hover {
- color: #ffeba7;
-}
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-@keyframes glow {
-    0%, 100% {
-        box-shadow: 0 0 15px rgba(255, 235, 167, 0.1), 0 0 20px rgba(255, 235, 167, 0.1);
-    }
-    50% {
-        box-shadow: 0 0 25px rgba(255, 235, 167, 0.25), 0 0 40px rgba(255, 235, 167, 0.2);
-    }
-}
+        .login-header h1 {
+            color: #1a1a1a;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
 
-  </style>
+        .login-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
+
+        .forgot-password a:hover {
+            color: #764ba2;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: #999;
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        /* Social Login Buttons */
+        .social-login {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-social {
+            flex: 1;
+            padding: 0.875rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-social:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-google {
+            color: #DB4437;
+        }
+
+        .btn-github {
+            color: #333;
+        }
+
+        .btn-social svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Sign Up Link */
+        .signup-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .signup-link a:hover {
+            color: #764ba2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .login-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="cursor cursor-dot"></div>
-  <div class="cursor cursor-outline"></div>
+    <!-- Background Video -->
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="videos/bgvid2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
 
-  <div class="bg-visual" aria-hidden="true">
-    <span class="blob b1"></span>
-    <span class="blob b2"></span>
-    <span class="blob b3"></span>
-  </div>
+    <nav class="navbar">
+        <a href="index.html" class="logo">DevTech</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="projects.html">Our Works</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="join.html">Join us</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
 
-  <nav class="navbar">
-    <a href="index.html" class="logo">DevTech</a>
-    <ul class="nav-links">
-        <li><a href="index.html#home">Home</a></li>
-        <li><a href="service.html">Services</a></li>
-        <li><a href="projects.html">Our Works</a></li>
-        <li><a href="about.html">Our Story</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="join.html">Join us</a></li>
-    </ul>
-  </nav>
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="reveal-typing">Welcome Back</h1>
+                <p class="reveal-typing">Sign in to continue to DevTech</p>
+            </div>
 
-<main><div class="card">
-  <h4 class="title">Log In!</h4>
-  <form>
-    <div class="field">
-      <svg class="input-icon" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-      <path d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z"></path></svg>
-      <input autocomplete="off" id="logemail" placeholder="Email" class="input-field" name="logemail" type="email">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Enter your username"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email-discord">Email or Discord ID</label>
+                    <input 
+                        type="text" 
+                        id="email-discord" 
+                        name="email-discord" 
+                        placeholder="Enter your email or Discord ID"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <div class="forgot-password">
+                        <a href="#forgot">Forgot your password?</a>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Sign In</button>
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <div class="social-login">
+                <button class="btn-social btn-google" onclick="loginWithGoogle()">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Google
+                </button>
+                <button class="btn-social btn-github" onclick="loginWithGithub()">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </button>
+            </div>
+
+            <div class="signup-link">
+                Don't have an account? <a href="join.html">Sign up</a>
+            </div>
+        </div>
     </div>
-    <div class="field">
-      <svg class="input-icon" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-      <path d="M80 192V144C80 64.47 144.5 0 224 0C303.5 0 368 64.47 368 144V192H384C419.3 192 448 220.7 448 256V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V256C0 220.7 28.65 192 64 192H80zM144 192H304V144C304 99.82 268.2 64 224 64C179.8 64 144 99.82 144 144V192z"></path></svg>
-      <input autocomplete="off" id="logpass" placeholder="Password" class="input-field" name="logpass" type="password">
-    </div>
-    <button class="btn" type="submit">Login</button>
-    <a href="#" class="btn-link">Forgot your password?</a>
-  </form>
-</div></main>
 
-<script src="script.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const emailDiscord = document.getElementById('email-discord').value;
+            const password = document.getElementById('password').value;
+            
+            // Add your login logic here
+            console.log('Login attempt:', { username, emailDiscord, password });
+            alert('Login functionality to be implemented');
+        });
+
+        function loginWithGoogle() {
+            // This is the first step of the OAuth 2.0 flow.
+            // You need to replace YOUR_GOOGLE_CLIENT_ID with the one from your Google Cloud project.
+            // The REDIRECT_URI must be an authorized URI in your project settings.
+            const googleAuthUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+            const clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your actual Client ID
+            const redirectUri = 'https://your-website.com/auth/google/callback'; // Replace with your backend callback URL
+            const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
+            
+            const url = `${googleAuthUrl}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+            
+            // For a real implementation, you would redirect the user:
+            // window.location.href = url;
+            alert('Redirecting to Google... (This is a demo). You would need a backend and a real Client ID to proceed.');
+            console.log('Google Auth URL:', url);
+        }
+
+        function loginWithGithub() {
+            // This is the first step of the GitHub OAuth flow.
+            // You need to replace YOUR_GITHUB_CLIENT_ID with the one from your GitHub OAuth App settings.
+            const githubAuthUrl = 'https://github.com/login/oauth/authorize';
+            const clientId = 'YOUR_GITHUB_CLIENT_ID'; // Replace with your actual Client ID
+            const scope = 'read:user user:email';
+
+            const url = `${githubAuthUrl}?client_id=${clientId}&scope=${scope}`;
+
+            // For a real implementation, you would redirect the user:
+            // window.location.href = url;
+            alert('Redirecting to GitHub... (This is a demo). You would need a backend and a real Client ID to proceed.');
+            console.log('GitHub Auth URL:', url);
+        }
+
+        (function(){
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const els = document.querySelectorAll('.reveal');
+            if (!els.length) return;
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+            els.forEach(el => obs.observe(el));
+        })();
+
+        (function(){
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const els = document.querySelectorAll('.reveal-typing');
+            els.forEach(el=>{
+                if (el.dataset._typingPrepared) return;
+                el.dataset._typingPrepared = '1';
+                const text = el.textContent;
+                el.textContent = '';
+                for (let i=0;i<text.length;i++){
+                    const s = document.createElement('span');
+                    s.className = 'char';
+                    s.textContent = text[i];
+                    el.appendChild(s);
+                }
+                const caret = document.createElement('span'); caret.className='typing-caret'; el.appendChild(caret);
+            });
+            const io = new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if (!entry.isIntersecting) return;
+                    const el = entry.target;
+                    const chars = el.querySelectorAll('.char');
+                    chars.forEach((c,i)=> c.style.animation = `charFade 360ms forwards ${i*30}ms`);
+                    const caret = el.querySelector('.typing-caret');
+                    if (caret) setTimeout(()=> caret.remove(), chars.length * 30 + 420);
+                    io.unobserve(el);
+                });
+            }, {threshold:0.05});
+            els.forEach(e=>io.observe(e));
+        })();
+    </script>
 </body>
 </html>
