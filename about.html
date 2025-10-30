@@ -17,7 +17,7 @@
         body {
             font-family: 'Roboto Mono', monospace;
             line-height: 1.6;
-            color: #e0e0e0;
+            color: #F0F4F8; /* Brighter base text color */
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
             position: relative;
@@ -35,18 +35,18 @@
         .cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: #667eea;
+            background-color: #c507f5;
             transition: transform 0.2s;
         }
         .cursor-outline {
             width: 40px;
             height: 40px;
-            border: 2px solid rgba(102, 126, 234, 0.5);
+            border: 2px solid rgba(197, 7, 245, 0.6);
             transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
         }
         .cursor-grow {
             transform: translate(-50%, -50%) scale(1.5);
-            border-color: rgba(118, 75, 162, 0.8);
+            border-color: rgba(139, 156, 239, 0.9);
         }
 
         a, button {
@@ -101,20 +101,20 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8b9cef 0%, #c507f5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-decoration: none;
-            animation: logoGlow 4s ease-in-out infinite;
+            animation: logoGlow 3s ease-in-out infinite;
         }
 
         @keyframes logoGlow {
             0%, 100% {
-                text-shadow: 0 0 8px rgba(102, 126, 234, 0.5), 0 0 16px rgba(118, 75, 162, 0.4);
+                text-shadow: 0 0 8px rgba(139, 156, 239, 0.6), 0 0 18px rgba(197, 7, 245, 0.5);
             }
             50% {
-                text-shadow: 0 0 16px rgba(102, 126, 234, 0.8), 0 0 32px rgba(118, 75, 162, 0.6);
+                text-shadow: 0 0 16px rgba(139, 156, 239, 0.9), 0 0 32px rgba(197, 7, 245, 0.7);
             }
         }
 
@@ -126,7 +126,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #e0e0e0;
+            color: #F0F4F8; /* Brighter nav links */
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -157,7 +157,7 @@
 
         .page-header p {
             font-size: 1.2rem;
-            color: #b0b0b0;
+            color: #D1D5DB; /* Brighter paragraph text */
         }
 
         .about-section {
@@ -178,7 +178,7 @@
         }
 
         .about-section p {
-            color: #b0b0b0;
+            color: #D1D5DB; /* Brighter paragraph text */
             line-height: 1.8;
         }
 
@@ -186,7 +186,7 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #e0e0e0;
+            color: #F0F4F8;
         }
 
         .team-grid {
@@ -223,7 +223,7 @@
 
         .team-member h3 {
             font-size: 1.4rem;
-            color: #e0e0e0;
+            color: #F0F4F8;
             margin-bottom: 0.5rem;
         }
 
@@ -234,7 +234,7 @@
 
         footer {
             background: #121212;
-            color: white;
+            color: #F0F4F8;
             text-align: center;
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
@@ -267,7 +267,7 @@
 
     <main>
     <nav class="navbar">
-        <a href="index.html" class="logo">DevTech</a>
+        <a href="index.html" class="logo">&lt;devtech&gt;</a>
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
             <li><a href="service.html">Services</a></li>
@@ -275,6 +275,7 @@
             <li><a href="about.html">Our Story</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="join.html">Join us</a></li>
+            <li><a href="cart.html">Cart</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
     </nav>

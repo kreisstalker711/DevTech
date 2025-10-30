@@ -54,18 +54,18 @@
         .cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: #667eea;
+            background-color: #c507f5;
             transition: transform 0.2s;
         }
         .cursor-outline {
             width: 40px;
             height: 40px;
-            border: 2px solid rgba(102, 126, 234, 0.5);
+            border: 2px solid rgba(197, 7, 245, 0.6);
             transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
         }
         .cursor-grow {
             transform: translate(-50%, -50%) scale(1.5);
-            border-color: rgba(118, 75, 162, 0.8);
+            border-color: rgba(139, 156, 239, 0.9);
         }
         a, button, input {
             cursor: none;
@@ -99,28 +99,28 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);            
+            background: linear-gradient(135deg, #8b9cef 0%, #c507f5 100%);            
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-decoration: none;
-            animation: logoGlow 4s ease-in-out infinite;
+            animation: logoGlow 3s ease-in-out infinite;
             display: inline-block;
             text-decoration: none;
         }
 
         @keyframes logoGlow {
             0%, 100% {
-                text-shadow: 0 0 8px rgba(102, 126, 234, 0.5), 0 0 16px rgba(118, 75, 162, 0.4);
+                text-shadow: 0 0 8px rgba(139, 156, 239, 0.6), 0 0 18px rgba(197, 7, 245, 0.5);
             }
             50% {
-                text-shadow: 0 0 16px rgba(102, 126, 234, 0.8), 0 0 32px rgba(118, 75, 162, 0.6);
+                text-shadow: 0 0 16px rgba(139, 156, 239, 0.9), 0 0 32px rgba(197, 7, 245, 0.7);
             }
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #f0f0f0;
+            color: #F0F4F8; /* Brighter nav links */
             font-weight: 500;
             text-decoration: none;
             transition: color 0.3s;
@@ -353,7 +353,7 @@
     <div class="video-overlay"></div>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">DevTech</a>
+        <a href="index.html" class="logo">&lt;devtech&gt;</a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="service.html">Services</a></li>
@@ -361,6 +361,7 @@
             <li><a href="about.html">Our Story</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="join.html">Join us</a></li>
+            <li><a href="cart.html">Cart</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
@@ -369,7 +370,7 @@
         <div class="login-card">
             <div class="login-header reveal">
                 <h1>Welcome Back</h1>
-                <p>Sign in to continue to DevTech</p>
+                <p>Admin Login to manage DevTech</p>
             </div>
 
             <form id="loginForm" class="reveal">
@@ -443,14 +444,23 @@
     <script src="script.js"></script>
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Prevent default form submission
             const username = document.getElementById('username').value;
             const emailDiscord = document.getElementById('email-discord').value;
             const password = document.getElementById('password').value;
-            
-            // Add your login logic here
-            console.log('Login attempt:', { username, emailDiscord, password });
-            alert('Login functionality to be implemented');
+
+            // WARNING: Storing passwords and user data in localStorage is highly insecure and
+            // should NEVER be done in a production environment. This is for demonstration purposes only.
+            const userDetails = {
+                username: username,
+                email: emailDiscord,
+                password: password // This is very insecure.
+            };
+
+            localStorage.setItem('adminUserDetails', JSON.stringify(userDetails)); // Store all details
+
+            alert(`Welcome, ${username}! Redirecting to homepage.`);
+            window.location.href = 'index.html'; // Redirect to homepage
         });
 
         function loginWithGoogle() {

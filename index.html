@@ -22,9 +22,10 @@
             line-height: 1.7; /* Increased for better spacing with larger fonts */
             /* brighter, more readable primary text on dark background */
             font-size: 17px; /* Increased base font size for better readability */
-            color: #EAF2FF;
+            color: #F0F4F8; /* Brighter base text color */
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
+            cursor: none;
         }
 
         /* Custom Cursor */
@@ -38,18 +39,18 @@
         .cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: #667eea;
+            background-color: #c507f5; /* Brighter, more vibrant cursor dot */
             transition: transform 0.2s;
         }
         .cursor-outline {
             width: 40px;
             height: 40px;
-            border: 2px solid rgba(102, 126, 234, 0.5);
+            border: 2px solid rgba(197, 7, 245, 0.6); /* Brighter outline */
             transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
         }
         .cursor-grow {
             transform: translate(-50%, -50%) scale(1.5);
-            border-color: rgba(118, 75, 162, 0.8);
+            border-color: rgba(139, 156, 239, 0.9); /* Brighter grow state */
         }
 
         a, button {
@@ -100,20 +101,20 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);            
+            background: linear-gradient(135deg, #8b9cef 0%, #c507f5 100%);            
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-decoration: none;
-            animation: logoGlow 4s ease-in-out infinite;
+            animation: logoGlow 3s ease-in-out infinite;
         }
 
         @keyframes logoGlow {
             0%, 100% {
-                text-shadow: 0 0 8px rgba(102, 126, 234, 0.5), 0 0 16px rgba(118, 75, 162, 0.4);
+                text-shadow: 0 0 8px rgba(139, 156, 239, 0.6), 0 0 18px rgba(197, 7, 245, 0.5);
             }
             50% {
-                text-shadow: 0 0 16px rgba(102, 126, 234, 0.8), 0 0 32px rgba(118, 75, 162, 0.6);
+                text-shadow: 0 0 16px rgba(139, 156, 239, 0.9), 0 0 32px rgba(197, 7, 245, 0.7);
             }
         }
 
@@ -125,7 +126,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #EAF2FF; /* align nav link color with primary text */
+            color: #F0F4F8; /* align nav link color with primary text */
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -256,7 +257,7 @@
             font-size: 1.4rem; /* Increased hero paragraph size */
             margin-bottom: 2rem;
             opacity: 0.95;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); /* Added shadow for readability */
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8); /* Added shadow for readability */
             color: #F8FBFF; /* bright, readable on hero overlay */
             animation: trackingIn 1.2s ease-out 0.5s backwards;
         }
@@ -321,7 +322,7 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             border: 1px solid rgba(102, 126, 234, 0.1);
-        }
+        }s
 
         .service-card:hover {
             transform: translateY(-10px);
@@ -336,13 +337,13 @@
         }
 
         .service-card h3 {
-            color: #CFE0FF; /* slightly brighter heading */
+            color: #E0E6FF; /* slightly brighter heading */
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
         .service-card p {
-            color: #C9D9FF;
+            color: #D1D5DB; /* Brighter, more readable paragraph text */
             font-size: 1.05rem; /* Slightly larger text in cards */
         }
 
@@ -371,7 +372,7 @@
 
         .about-text p {
             font-size: 1.7rem; /* Increased paragraph font size */
-            color: #DCE1E9;
+            color: #F0F4F8;
             opacity: 0.95;/* A brighter, clearer white */
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* Enhanced shadow for readability */
             line-height: 1.8;
@@ -410,7 +411,7 @@
         }
 
         .stat-label { 
-            color: #C9D9FF; 
+            color: #D1D5DB; 
             margin-top: 0.5rem; 
             font-size: 1.05rem;
         }
@@ -432,7 +433,7 @@
             font-size: 1.3rem; /* Increased contact paragraph size */
             margin-bottom: 2rem;
             opacity: 0.95;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
             color: #F6FAFF; /* ensure contrast on gradient contact section */
         }
 
@@ -459,7 +460,7 @@
         footer {
             /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */ /* Removed to allow video bg to show */
             background: #121212; /* Classic Dark Charcoal */
-            color: #EAF2FF; /* vibrant footer text */
+            color: #F0F4F8; /* vibrant footer text */
             text-align: center;
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
@@ -493,7 +494,7 @@
 
     <main>
     <nav class="navbar">
-        <a href="index.html" class="logo">DevTech</a>
+        <a href="index.html" class="logo">&lt;devtech&gt;</a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="service.html">Services</a></li>
@@ -501,6 +502,7 @@
             <li><a href="about.html">Our Story</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="join.html">Join us</a></li>
+            <li><a href="cart.html">Cart</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
         <button class="menu-toggle" aria-label="Toggle navigation">
@@ -517,6 +519,7 @@
         <section id="home" class="hero">
             <!-- The hero-overlay is now part of the main section-overlay -->
             <div class="hero-content">
+                <p id="adminGreeting" style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #a0aec0;"></p>
                 <h1>We Build Websites That Are <span id="typing" style="color: #3c2ccb"></span></h1>
                 <p>We craft exceptional web solutions that transform businesses and elevate user experiences</p>
                 <a href="contact.html" class="cta-button">Get Started</a>
@@ -569,6 +572,32 @@
     </main>
     <script src="script.js"></script>
     <script>
+        // Admin Greeting Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const userDetailsString = localStorage.getItem('adminUserDetails');
+            const adminGreetingElement = document.getElementById('adminGreeting');
+
+            if (userDetailsString && adminGreetingElement) {
+                const userDetails = JSON.parse(userDetailsString);
+                const adminUsername = userDetails.username;
+
+                if (adminUsername) {
+                    const now = new Date();
+                    const hour = now.getHours();
+                    let greetingPrefix;
+
+                    if (hour < 12) { greetingPrefix = "Good morning"; } 
+                    else if (hour < 18) { greetingPrefix = "Good afternoon"; } 
+                    else { greetingPrefix = "Good evening"; }
+
+                    adminGreetingElement.textContent = `${greetingPrefix}, ${adminUsername}! What can we do?`;
+                    adminGreetingElement.style.display = 'block'; // Ensure it's visible
+                }
+            } else if (adminGreetingElement) {
+                adminGreetingElement.style.display = 'none'; // Hide if no username
+            }
+        });
+
         /* Typing-reveal on-scroll: split text into chars and animate with stagger */
         (function(){
             if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

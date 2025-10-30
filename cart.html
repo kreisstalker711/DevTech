@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Cart - Dev Tech</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.6;
+            color: #F0F4F8; /* Brighter base text color */
+            background: #121212; /* Classic Dark Charcoal */
+            overflow-x: hidden;
+            position: relative;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            z-index: 1100;
+            pointer-events: none;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #c507f5;
+            transition: transform 0.2s;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(197, 7, 245, 0.6);
+            transition: transform 0.2s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        .cursor-grow {
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: rgba(139, 156, 239, 0.9);
+        }
+
+        a, button {
+            cursor: none;
+        }
+
+        .video-background-container {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+        }
+
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b9cef 0%, #c507f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                text-shadow: 0 0 8px rgba(139, 156, 239, 0.6), 0 0 18px rgba(197, 7, 245, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 16px rgba(139, 156, 239, 0.9), 0 0 32px rgba(197, 7, 245, 0.7);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #F0F4F8; /* Brighter nav links */
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cart-content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cart-content h1 {
+            font-size: 3rem;
+            color: #8b9cef;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-content p {
+            font-size: 1.2rem;
+            color: #D1D5DB;
+            margin-bottom: 2rem;
+        }
+        
+        .cart-details, .user-details {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 100%;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .cart-details h2, .user-details h2 {
+            color: #8b9cef;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        #cart-items-list, #user-info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart-items-list li, #user-info-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #cart-items-list li:last-child, #user-info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        .clear-button {
+            background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+        }
+        .clear-button:hover {
+            box-shadow: 0 10px 20px rgba(197, 48, 48, 0.25);
+        }
+
+        #order-success-message {
+            display: none; /* Hidden by default */
+            text-align: center;
+        }
+
+        footer {
+            background: transparent; /* Allow video background to show through */
+            color: #F0F4F8;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+
+    <div class="video-background-container">
+        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
+    </div>
+
+    <main>
+        <nav class="navbar">
+            <a href="index.html" class="logo">&lt;devtech&gt;</a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="projects.html">Our Works</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="join.html">Join us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+
+        <section class="cart-content">
+            <div id="cart-view"> <!-- This container will be hidden on success -->
+                <h1 id="cart-title">Your Order Details</h1>
+
+                <form id="order-form" action="https://formspree.io/f/myyqnyza" method="POST">
+                    <!-- Hidden fields to capture data for the email -->
+                    <input type="hidden" name="username" id="form-username">
+                    <input type="hidden" name="email" id="form-email">
+                    <input type="hidden" name="ordered_services" id="form-services">
+                    <input type="hidden" name="_replyto" id="form-replyto"> <!-- Added for easier replies -->
+                    <input type="hidden" name="_subject" value="New Service Order from DevTech Website!">
+
+                    <div id="user-details-container" class="user-details" style="display: none;">
+                        <h2>Registered User Info</h2>
+                        <ul id="user-info-list"></ul>
+                    </div>
+
+                    <div class="cart-details">
+                        <h2>Services in Your Cart</h2>
+                        <ul id="cart-items-list"></ul>
+                        <p id="empty-cart-message" style="display: none; text-align: center; padding: 1rem 0;">Your cart is empty.</p>
+                    </div>
+                    <div class="cart-actions">
+                        <a href="service.html" class="action-button">Order Another Service</a>
+                        <button type="submit" id="place-order-button" class="action-button">Place Order</button>
+                        <button type="button" id="clear-cart-button" class="action-button clear-button">Clear Cart</button>
+                    </div>
+                </form>
+            </div>
+            <div id="order-success-message">
+                <h2>Thank You!</h2>
+                <p>Your order has been placed successfully. We will be in touch with you shortly.</p>
+                <a href="index.html" class="action-button">Back to Home</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsList = document.getElementById('cart-items-list');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const clearCartButton = document.getElementById('clear-cart-button');
+            const userInfoList = document.getElementById('user-info-list');
+            const userDetailsContainer = document.getElementById('user-details-container');
+            const orderForm = document.getElementById('order-form');
+            const placeOrderButton = document.getElementById('place-order-button');
+            const cartView = document.getElementById('cart-view');
+
+            // --- 1. Load and Display User Details ---
+            let username = 'Guest'; // Default username
+            const userDetailsString = localStorage.getItem('adminUserDetails');
+            if (userDetailsString) {
+                const userDetails = JSON.parse(userDetailsString);
+                userDetailsContainer.style.display = 'block';
+                userInfoList.innerHTML = `
+                    <li><strong>Username:</strong> ${userDetails.username || 'N/A'}</li>
+                    <li><strong>Email/Discord:</strong> ${userDetails.email || 'N/A'}</li>
+                    <li><strong>Password:</strong> ${userDetails.password || 'N/A'} <em style="color: #c53030;">(Stored insecurely)</em></li>
+                `;
+                username = userDetails.username || 'Guest';
+                // Populate hidden form fields
+                document.getElementById('form-username').value = userDetails.username || 'N/A';
+                document.getElementById('form-email').value = userDetails.email || 'N/A';
+                document.getElementById('form-replyto').value = userDetails.email || 'N/A'; // Populate reply-to
+            }
+
+            // --- 2. Load and Display Cart Items ---
+            function displayCartItems() {
+                const cart = JSON.parse(localStorage.getItem('devtechCart')) || [];
+                cartItemsList.innerHTML = ''; // Clear previous items
+
+                if (cart.length === 0) {
+                    emptyCartMessage.style.display = 'block';
+                    emptyCartMessage.textContent = `No orders placed yet, ${username}.`;
+                    clearCartButton.style.display = 'none';
+                    placeOrderButton.style.display = 'none'; // Hide order button if cart is empty
+                } else {
+                    emptyCartMessage.style.display = 'none';
+                    clearCartButton.style.display = 'inline-block';
+                    placeOrderButton.style.display = 'inline-block';
+                    cart.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item;
+                        cartItemsList.appendChild(listItem);
+                    });
+                }
+            }
+
+            // --- 3. Clear Cart Functionality ---
+            clearCartButton.addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear all items from your cart?')) {
+                    localStorage.removeItem('devtechCart');
+                    displayCartItems(); // Re-render the cart view
+                }
+            });
+
+            // --- 4. Handle Order Submission ---
+            orderForm.addEventListener("submit", async function(event) {
+                event.preventDefault();
+                
+                // Populate the hidden services field right before submission
+                const cart = JSON.parse(localStorage.getItem('devtechCart')) || [];
+                document.getElementById('form-services').value = cart.join(', ');
+
+                const data = new FormData(event.target);
+                try {
+                    const response = await fetch(event.target.action, {
+                        method: orderForm.method,
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    cartView.style.display = "none";
+                    document.getElementById("order-success-message").style.display = "block";
+                    localStorage.removeItem('devtechCart'); // Clear the cart on success
+                } catch (error) {
+                    alert("Oops! There was a problem placing your order. Please try again.");
+                }
+            });
+
+            // Initial display on page load
+            displayCartItems();
+        });
+    </script>
+</body>
+</html>
+
+            }
+        });
+    </script>
+</body>
+</html>
