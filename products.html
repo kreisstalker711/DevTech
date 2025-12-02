@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Projects - Dev Tech</title>
+    <title>Products - Dev Tech</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <style>
         * {
@@ -74,10 +74,6 @@
             transform: translate(-50%, -50%);
             z-index: -1;
         }
-
-        @keyframes float1 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,6%,0) scale(1.03); } 100% { transform: translate3d(0,0,0) scale(1); } }
-        @keyframes float2 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-6%,4%,0) scale(0.98); } 100% { transform: translate3d(0,0,0) scale(1); } }
-        @keyframes float3 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(4%,-5%,0) scale(1.02); } 100% { transform: translate3d(0,0,0) scale(1); } }
 
         main {
             position: relative;
@@ -151,71 +147,43 @@
             background-clip: text;
         }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
-            margin-top: 4rem;
-            text-align: left;
-        }
-
-        .project-card {
+        .product-card {
             background: rgba(30, 30, 30, 0.5); /* Glass effect */
             backdrop-filter: blur(10px);
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: box-shadow 0.3s, background 0.3s;
-            display: flex;
-            flex-direction: column;
+            margin-top: 4rem;
+            text-align: left;
         }
 
-        .project-card:hover {
+        .product-card:hover {
             background: rgba(30, 30, 30, 0.7);
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
         }
 
-        .project-card iframe {
+        .product-card iframe {
             width: 100%;
             height: 600px;
             border: none;
             display: block;
         }
 
-        .project-info {
+        .product-info {
             padding: 2rem;
         }
 
-        .project-info h3 {
+        .product-info h3 {
             font-size: 1.8rem;
             color: #8b9cef;
             margin-bottom: 1rem;
         }
 
-        /* You can add your description text inside this p tag */
-        .project-info  p {
+        .product-info  p {
             color: white;
             font-size: 1rem;
-        }
-
-        .project-button {
-            display: inline-block;
-            padding: 0.8rem 1.8rem;
-            margin-top: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .project-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
+            line-height: 1.7;
         }
 
         footer {
@@ -225,85 +193,11 @@
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
         }
-
-        /* Animation Styles */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Staggered animation delays */
-        .project-card:nth-child(1) { transition-delay: 0.2s; }
-        .project-card:nth-child(2) { transition-delay: 0.3s; }
-        .project-card:nth-child(3) { transition-delay: 0.4s; }
-
-        /* New Product Notification */
-        #new-product-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(10px);
-            color: #F0F4F8;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            z-index: 2000;
-            max-width: 350px;
-            display: none; /* Hidden by default */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        }
-
-        #new-product-notification.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #new-product-notification h4 {
-            margin: 0 0 0.5rem;
-            color: #8b9cef;
-            font-size: 1.1rem;
-        }
-
-        #new-product-notification p {
-            margin: 0 0 1rem;
-            font-size: 0.95rem;
-            color: #D1D5DB;
-        }
-
-        #close-notification {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: #a0aec0;
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-        
     </style>
 </head>
 <body>
     <div class="cursor cursor-dot"></div>
     <div class="cursor cursor-outline"></div>
-
-    <!-- New Product Release Notification -->
-    <div id="new-product-notification">
-        <button id="close-notification" aria-label="Close notification">&times;</button>
-        <h4>New Release!</h4>
-        <p>Check out our latest project: <a href="https://codeseek.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: #667eea;">CodeSeek</a>, an innovative code snippet platform.</p>
-        <a href="https://codeseek.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-button">Explore Now</a>
-    </div>
 
     <div class="video-background-container">
         <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
@@ -325,39 +219,15 @@
     </nav>
 
     <div class="content-container">
-        <h1 class="animate-on-scroll">Our Projects</h1>
-        <p class="animate-on-scroll" style="transition-delay: 0.1s;">Here's our recent projects. More projects coming soon!</p>
+        <h1>Our Products</h1>
+        <p>Discover the innovative tools and platforms we've built.</p>
         
-        <div class="project-grid">
-            <!-- Project 1 -->
-            <div class="project-card animate-on-scroll">
-                <iframe src="https://whereweworkinc.netlify.app/" title="Where We Work Inc. Project"></iframe>
-                <div class="project-info">
-                    <h3>Where We Work Inc.</h3>
-                    <p>A modern, responsive website for a co-working space, showcasing amenities, plans, and location.</p>
-                    <button class="project-button" onclick="movetopage3()">View Live Project</button>
-                </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>CodeSeek</h3>
+                <p>CodeSeek is an innovative code snippet platform designed for developers to save, discover, and share useful code snippets. It provides a centralized, searchable library to boost productivity and streamline the development process. Find the right code, right when you need it.</p>
             </div>
-
-            <!-- Project 1 -->
-            <div class="project-card animate-on-scroll" style="transition-delay: 0.3s;">
-                <iframe src="https://envirinosynthquiz.vercel.app/" title="Envirino Synth Quiz Project"></iframe>
-                <div class="project-info">
-                    <h3>EnvirinoSynth.quiz</h3>
-                    <p>An AI quiz website about environment. To test your knowldege about environment</p>
-                    <button class="project-button" onclick="movetopage1()">View Live Project</button>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="project-card animate-on-scroll" style="transition-delay: 0.4s;">
-                <iframe src="https://stemedtech.netlify.app/" title="StemEdtech"></iframe>
-                <div class="project-info">
-                    <h3>StemEdtech</h3>
-                    <p>A Website where you cn learn about Electronics and Iot devices in a simplifyed way</p>
-                    <button class="project-button" onclick="movetopage2()">View Project</button>
-                </div>
-            </div>
+            <iframe src="https://codeseek.vercel.app/" title="CodeSeek Product Showcase"></iframe>
         </div>
     </div>
 

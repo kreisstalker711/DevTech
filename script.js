@@ -94,6 +94,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
             menuToggle.classList.toggle('active');
         });
     }
+
+    // New Product Release Notification
+    const productNotification = document.getElementById('new-product-notification');
+    const closeNotificationBtn = document.getElementById('close-notification');
+
+    // Check if the notification has been shown in this session
+    if (productNotification && !sessionStorage.getItem('productNotificationShown')) {
+        // Show the notification after a short delay
+        setTimeout(() => {
+            productNotification.style.display = 'block';
+            productNotification.classList.add('visible');
+        }, 1500); // 1.5-second delay
+    }
+
+    if (closeNotificationBtn) {
+        closeNotificationBtn.addEventListener('click', () => {
+            productNotification.classList.remove('visible');
+            // Hide it after the transition
+            setTimeout(() => productNotification.style.display = 'none', 300);
+            // Set a flag in session storage so it doesn't show again
+            sessionStorage.setItem('productNotificationShown', 'true');
+        });
+    }
 });
 
 function movetopage1() {

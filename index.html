@@ -248,7 +248,6 @@
         .hero h1 {
             font-size: 3.2rem; /* Made hero heading significantly larger */
             margin-bottom: 1rem;
-            white-space: nowrap; /* Keeps the h1 on one line */
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); /* Enhanced shadow for readability */
             font-family: 'Roboto Mono', monospace;
         }
@@ -322,7 +321,7 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             border: 1px solid rgba(102, 126, 234, 0.1);
-        }s
+        }
 
         .service-card:hover {
             transform: translateY(-10px);
@@ -486,6 +485,54 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* New Product Notification */
+        #new-product-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            color: #F0F4F8;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 2000;
+            max-width: 350px;
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        #new-product-notification.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #new-product-notification h4 {
+            margin: 0 0 0.5rem;
+            color: #8b9cef;
+            font-size: 1.1rem;
+        }
+
+        #new-product-notification p {
+            margin: 0 0 1rem;
+            font-size: 0.95rem;
+            color: #D1D5DB;
+        }
+
+        #close-notification {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
@@ -511,6 +558,14 @@
             <span class="bar"></span>
         </button>
     </nav>
+
+    <!-- New Product Release Notification -->
+    <div id="new-product-notification">
+        <button id="close-notification" aria-label="Close notification">&times;</button>
+        <h4>New Release!</h4>
+        <p>Check out our latest project: <a href="https://codeseek.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: #667eea;">CodeSeek</a>, an innovative code snippet platform.</p>
+        <a href="https://codeseek.vercel.app/" target="_blank" rel="noopener noreferrer" class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Explore Now</a>
+    </div>
 
     <div class="video-section-bg">
         <div class="section-overlay"></div>
@@ -621,7 +676,7 @@
             }
             const els = document.querySelectorAll('.reveal-typing');
             els.forEach(prepare);
-            const io = new IntersectionObserver((entries)=>{
+                       const io = new IntersectionObserver((entries)=>{
                 entries.forEach(entry=>{
                     if (!entry.isIntersecting) return;
                     const el = entry.target;
@@ -636,7 +691,7 @@
                     if (caret) setTimeout(()=> caret.remove(), total);
                     io.unobserve(el);
                 });
-            }, {threshold: 0.05});
+            }, {threshold: 0.05}); // Corrected property name
             els.forEach(e => io.observe(e));
         })();
 
@@ -685,16 +740,23 @@
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
                 let count = 0;
+                if (!counter) return; // Check for null pointer reference
                 const duration = 2000; // 2 seconds
+                if (isNaN(target)) return; // Check for invalid target value
+
                 const increment = target / (duration / 16); // Calculate increment per frame
 
                 const updateCount = () => {
                     count += increment;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count);
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        counter.innerText = target;
+                    try {
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    } catch (error) {
+                        console.error(`Error occurred while animating counters: ${error}`);
                     }
                 };
                 updateCount();

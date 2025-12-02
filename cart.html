@@ -228,11 +228,67 @@
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
         }
+
+        /* New Product Notification */
+        #new-product-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            color: #F0F4F8;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 2000;
+            max-width: 350px;
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        #new-product-notification.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #new-product-notification h4 {
+            margin: 0 0 0.5rem;
+            color: #8b9cef;
+            font-size: 1.1rem;
+        }
+
+        #new-product-notification p {
+            margin: 0 0 1rem;
+            font-size: 0.95rem;
+            color: #D1D5DB;
+        }
+
+        #close-notification {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
     <div class="cursor cursor-dot"></div>
     <div class="cursor cursor-outline"></div>
+
+    <!-- New Product Release Notification -->
+    <div id="new-product-notification">
+        <button id="close-notification" aria-label="Close notification">&times;</button>
+        <h4>New Release!</h4>
+        <p>Check out our latest project: <a href="https://codeseek.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: #667eea;">CodeSeek</a>, an innovative code snippet platform.</p>
+        <a href="https://codeseek.vercel.app/" target="_blank" rel="noopener noreferrer" class="action-button">Explore Now</a>
+    </div>
 
     <div class="video-background-container">
         <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
@@ -244,6 +300,7 @@
             <ul class="nav-links">
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="service.html">Services</a></li>
+                <li><a href="products.html">Products</a></li>
                 <li><a href="projects.html">Our Works</a></li>
                 <li><a href="about.html">Our Story</a></li>
                 <li><a href="contact.html">Contact</a></li>
