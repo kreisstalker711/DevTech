@@ -193,6 +193,26 @@
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
         }
+
+        .product-button {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .product-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
+        }
     </style>
 </head>
 <body>
@@ -200,7 +220,7 @@
     <div class="cursor cursor-outline"></div>
 
     <div class="video-background-container">
-        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
+        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid3.mp4"></video>
     </div>
 
     <main>
@@ -208,11 +228,10 @@
         <a href="index.html" class="logo">&lt;devtech&gt;</a>
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
+            <li><a href="products.html">Products</a></li>
             <li><a href="service.html">Services</a></li>
             <li><a href="projects.html">Our Works</a></li>
             <li><a href="about.html">Our Story</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="join.html">Join us</a></li>
             <li><a href="cart.html">Cart</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
@@ -229,10 +248,29 @@
             </div>
             <iframe src="https://codeseek.vercel.app/" title="CodeSeek Product Showcase"></iframe>
         </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Stemed</h3>
+                <p>Empowering the next generation with interactive STEM education tools and resources.</p>
+                <a href="https://stemedtech.netlify.app/" target="_blank" rel="noopener noreferrer" class="product-button">View Live Project</a>
+            </div>
+             <iframe src="https://stemedtech.netlify.app/" title="StemEdtech"></iframe>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Envirinosynth</h3>
+                <p>Advanced environmental monitoring and synthesis platform for sustainable solutions.</p>
+                <a href="https://envirinosynthquiz.vercel.app/" target="_blank" rel="noopener noreferrer" class="product-button">View Live Project</a>
+            </div>
+                <iframe src="https://envirinosynthquiz.vercel.app/" title="Envirino Synth Quiz Project"></iframe>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #b0b0b0;">Contact: kathir20san@gmail.com</p>
     </footer>
 
     <script src="script.js"></script>

@@ -17,11 +17,12 @@
         body {
             font-family: 'Roboto Mono', monospace;
             line-height: 1.6;
-            color: #F0F4F8; /* Brighter base text color */
+            color: #F9FAFB; /* Brighter text for high contrast */
             background: #121212; /* Classic Dark Charcoal */
             overflow-x: hidden;
             position: relative;
             cursor: none;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.7); /* Shadow for readability on video */
         }
 
         /* Custom Cursor */
@@ -61,7 +62,7 @@
             z-index: -1;
             pointer-events: none;
             overflow: hidden;
-            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+            background-color: rgba(0, 0, 0, 0.55); /* Darker overlay for text readability */
         }
 
         .background-video {
@@ -122,7 +123,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #F0F4F8; /* Brighter nav links */
+            color: inherit; /* Use the new body color for consistency */
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -151,7 +152,7 @@
 
         .cart-content p {
             font-size: 1.2rem;
-            color: #D1D5DB;
+            color: #E5E7EB; /* Slightly softer than main text, but still very readable */
             margin-bottom: 2rem;
         }
         
@@ -223,7 +224,7 @@
 
         footer {
             background: transparent; /* Allow video background to show through */
-            color: #F0F4F8;
+            color: inherit; /* Use the new body color for consistency */
             text-align: center;
             padding: 2rem;
             border-top: 1px solid rgba(102, 126, 234, 0.2);
@@ -235,8 +236,8 @@
             bottom: 20px;
             right: 20px;
             background: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(10px);
-            color: #F0F4F8;
+            backdrop-filter: blur(10px); 
+            color: #F9FAFB;
             padding: 1.5rem;
             border-radius: 12px;
             border: 1px solid rgba(102, 126, 234, 0.2);
@@ -263,7 +264,7 @@
         #new-product-notification p {
             margin: 0 0 1rem;
             font-size: 0.95rem;
-            color: #D1D5DB;
+            color: #E5E7EB;
         }
 
         #close-notification {
@@ -291,7 +292,7 @@
     </div>
 
     <div class="video-background-container">
-        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
+        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid3.mp4"></video>
     </div>
 
     <main>
@@ -440,9 +441,6 @@
     </script>
 </body>
 </html>
-
-            }
-        });
     </script>
 </body>
 </html>

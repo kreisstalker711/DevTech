@@ -61,7 +61,7 @@
             z-index: -1;
             pointer-events: none;
             overflow: hidden;
-            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay for text readability */
         }
 
         .background-video {
@@ -71,8 +71,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: -1;
+            transform: translate(-50%, -50%); /* z-index is inherited or can be -2 if needed */
         }
 
         @keyframes float1 { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,6%,0) scale(1.03); } 100% { transform: translate3d(0,0,0) scale(1); } }
@@ -306,7 +305,7 @@
     </div>
 
     <div class="video-background-container">
-        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
+        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid3.mp4"></video>
     </div>
 
     <main>
@@ -339,23 +338,33 @@
                 </div>
             </div>
 
-            <!-- Project 1 -->
+            <!-- Project 2: Graphix Design -->
+            <div class="project-card animate-on-scroll" style="transition-delay: 0.3s;">
+                <iframe src="https://graphixdesign.vercel.app/" title="Graphix Design Project"></iframe>
+                <div class="project-info">
+                    <h3>Graphix Design</h3>
+                    <p>A sleek and modern portfolio website for a graphic designer, showcasing their creative work and services.</p>
+                    <a href="https://graphixdesign.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-button">View Live Project</a>
+                </div>
+            </div>
+
+            <!-- Project 3: EnvirinoSynth.quiz -->
             <div class="project-card animate-on-scroll" style="transition-delay: 0.3s;">
                 <iframe src="https://envirinosynthquiz.vercel.app/" title="Envirino Synth Quiz Project"></iframe>
                 <div class="project-info">
                     <h3>EnvirinoSynth.quiz</h3>
                     <p>An AI quiz website about environment. To test your knowldege about environment</p>
-                    <button class="project-button" onclick="movetopage1()">View Live Project</button>
+                    <a href="https://envirinosynthquiz.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-button">View Live Project</a>
                 </div>
             </div>
 
-            <!-- Project 2 -->
+            <!-- Project 4: StemEdtech -->
             <div class="project-card animate-on-scroll" style="transition-delay: 0.4s;">
                 <iframe src="https://stemedtech.netlify.app/" title="StemEdtech"></iframe>
                 <div class="project-info">
                     <h3>StemEdtech</h3>
                     <p>A Website where you cn learn about Electronics and Iot devices in a simplifyed way</p>
-                    <button class="project-button" onclick="movetopage2()">View Project</button>
+                    <a href="https://stemedtech.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-button">View Project</a>
                 </div>
             </div>
         </div>
@@ -364,7 +373,6 @@
     <footer>
         <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
     </footer>
-
     <script src="script.js"></script>
     </main>
 </body>

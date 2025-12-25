@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <meta name="google-site-verification" content="Kj4Y82L9wAp13p1ksrNwwO2zdARdWsERXBj6Of-0gWM" />
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.5/build/spline-viewer.js" async></script>
     <style>
         * {
             margin: 0;
@@ -210,7 +211,7 @@
         }
 
         main {
-            position: static;
+            position: relative;
             z-index: 1;
         }
 
@@ -350,6 +351,7 @@
             padding: 5rem 5%;
             max-width: 1200px;
             margin: 0 auto; /* Background is inherited from body */
+            position: relative;
         }
 
         .about-content {
@@ -544,11 +546,10 @@
         <a href="index.html" class="logo">&lt;devtech&gt;</a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
             <li><a href="service.html">Services</a></li>
             <li><a href="projects.html">Our Works</a></li>
             <li><a href="about.html">Our Story</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="join.html">Join us</a></li>
             <li><a href="cart.html">Cart</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
@@ -569,11 +570,12 @@
 
     <div class="video-section-bg">
         <div class="section-overlay"></div>
-        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid2.mp4"></video>
+        <video autoplay loop muted playsinline class="background-video" src="videos/bgvid3.mp4"></video>
 
         <section id="home" class="hero">
             <!-- The hero-overlay is now part of the main section-overlay -->
             <div class="hero-content">
+                
                 <p id="adminGreeting" style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #a0aec0;"></p>
                 <h1>We Build Websites That Are <span id="typing" style="color: #3c2ccb"></span></h1>
                 <p>We craft exceptional web solutions that transform businesses and elevate user experiences</p>
@@ -582,6 +584,7 @@
         </section>
 
         <section id="about" class="about">
+
             <div class="about-content">
                 <div class="about-text">
                     <h2 class="color-change-text">Why Choose Dev Tech?</h2>
@@ -621,6 +624,7 @@
 
         <footer>
             <p>&copy; 2025 Dev Tech. All rights reserved. | Crafting Digital Excellence</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #b0b0b0;">Contact: kathir20san@gmail.com</p>
         </footer>
     </div>
 
